@@ -50,11 +50,11 @@ const Footer = () => {
             <div className="ml-10 mt-10">
                 <div className="flex flex-col sm:flex-row justify-between text-sm">
                     <ul className="space-y-2 sm:space-y-0 sm:space-x-6 flex flex-col sm:flex-row">
-                        <li><a href="#" className="hover:text-white">About Us</a></li>
-                        <li><a href="#" className="hover:text-white">Our Team</a></li>
-                        <li><a href="#" className="hover:text-white">Portfolio</a></li>
-                        <li><a href="#" className="hover:text-white">Testimonials</a></li>
-                        <li><a href="#" className="hover:text-white">Careers</a></li>
+                        <li><a href="#" className="hover:text-white">Home</a></li>
+                        <li><a href="#" className="hover:text-white">About</a></li>
+                        <li><a href="#" className="hover:text-white">Projects</a></li>
+                        <li><a href="#" className="hover:text-white">Serices</a></li>
+                        <li><a href="#" className="hover:text-white">Contact</a></li>
                     </ul>
                     <div className="space-x-4 mt-4 mr-10 sm:mt-0">
                         <a href="#" className="hover:text-white">Privacy Policy</a>
@@ -69,7 +69,7 @@ const Footer = () => {
             {/* Email Subscription */}
             <div className="text-center ">
                 <h3 className="text-gray-400 ">
-                    © 2025 NekoArch Studio. Made with
+                    © 2025 Rock Design Studio. Made with
                     and lots of anime inspiration
                 </h3>
 
