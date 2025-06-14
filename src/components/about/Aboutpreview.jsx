@@ -1,18 +1,44 @@
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
-import aboutImage from '../../assets/images/aboutpreview.jpg';
+
+import aboutImage from '../../assets/images/aboutpreview.webp?lqip';
 
 const AboutPreview = () => {
+    const [isLoaded, setIsLoaded] = useState(false);
+    const imgRef = useRef();
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setIsLoaded(true);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.1 }
+        );
+
+        if (imgRef.current) observer.observe(imgRef.current);
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <section id="next-section" className="pt-10 pb-20 px-6 font-barlow md:px-10">
             <div className="grid md:grid-cols-2 gap-10 items-center">
-                {/* ✅ Full-width image with bottom-left label */}
+                {/* ✅ Image with LQIP blur transition */}
                 <div className="relative w-full">
                     <Link to="/about">
-                        <img
-                            src={aboutImage}
-                            alt="About Rock Dezign"
-                            className="w-full h-[220px] md:h-[300px] object-cover"
+                        <div
+                            ref={imgRef}
+                            className="w-full h-[220px] md:h-[300px] bg-center bg-cover transition-all duration-1000 ease-out"
+                            style={{
+                                backgroundImage: `url(${isLoaded ? aboutImage.src : aboutImage.lqip})`,
+                                filter: isLoaded ? 'blur(0px)' : 'blur(10px)',
+                            }}
                         />
                         <span className="absolute bottom-4 left-4 text-white text-sm md:text-base font-semibold">
                             About

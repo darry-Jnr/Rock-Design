@@ -1,7 +1,7 @@
 import React from 'react';
-import contactImage from '../../src/assets/images/contact-img.jpg';
+import contactImage from '../../src/assets/images/contact-img.webp';
 import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
-import Imagebg from '../assets/images/about-content.jpg';
+import Imagebg from '../assets/images/about-content.webp';
 
 const Contact = () => {
     return (
@@ -18,6 +18,7 @@ const Contact = () => {
                 <div className="md:w-1/2 w-full h-60 md:h-auto relative z-10">
                     <img
                         src={contactImage}
+                        loading="lazy"
                         alt="Contact Architecture"
                         className="w-full h-full object-cover"
                     />

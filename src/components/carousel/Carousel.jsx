@@ -1,4 +1,3 @@
-// src/components/carousel/Carousel.jsx
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
@@ -7,8 +6,8 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
 // ✅ Local assets
-import slide1 from '../../assets/images/img1.jpg';
-import slide3 from '../../assets/images/img2.jpg';
+import slide1 from '../../assets/images/img1.webp';
+import slide3 from '../../assets/images/img2.webp';
 import video1 from '../../assets/vedios/sample.mp4';
 import video2 from '../../assets/vedios/sample2.mp4';
 
@@ -20,16 +19,17 @@ const Carousel = () => {
                     modules={[Autoplay, EffectFade, Pagination]}
                     effect="fade"
                     autoplay={{ delay: 6000, disableOnInteraction: false }}
-                    speed={2000} // ⏱️ Smooth fade
+                    speed={2000}
                     loop={true}
                     pagination={{ clickable: true }}
                     className="h-full"
                 >
-                    {/* ✅ Video Slides FIRST */}
+                    {/* ✅ Video Slides */}
                     {[video1, video2].map((src, index) => (
                         <SwiperSlide key={`video-${index}`}>
                             <video
                                 src={src}
+                                preload="metadata"
                                 autoPlay
                                 muted
                                 loop
@@ -39,12 +39,13 @@ const Carousel = () => {
                         </SwiperSlide>
                     ))}
 
-                    {/* ✅ Then Image Slides */}
+                    {/* ✅ Image Slides with Lazy Loading */}
                     {[slide1, slide3].map((src, index) => (
                         <SwiperSlide key={`img-${index}`}>
                             <img
                                 src={src}
                                 alt={`Slide ${index + 1}`}
+                                loading="lazy"
                                 className="w-full h-full object-cover"
                             />
                         </SwiperSlide>

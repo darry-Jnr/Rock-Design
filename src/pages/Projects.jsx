@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import projectData from '../data/projectData';
-import Imagebg from '../assets/images/about-content.jpg';
+import Imagebg from '../assets/images/about-content.webp?lqip';
 
 const containerVariants = {
     hidden: {},
@@ -22,13 +22,29 @@ const Projects = () => {
     return (
         <div className="bg-white">
             {/* ✅ Hero / Banner */}
-            <div
-                className="relative h-[300px] md:h-[450px] bg-cover bg-center font-barlow overflow-x-hidden flex items-center"
-                style={{ backgroundImage: `url(${Imagebg})` }}
-            >
-                <div className="absolute inset-0 bg-black/40"></div>
+            <div className="relative h-[300px] md:h-[450px] font-barlow overflow-x-hidden flex items-center">
+                <div
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{
+                        backgroundImage: `url(${Imagebg.lqip})`,
+                        filter: 'blur(20px)',
+                        transform: 'scale(1.05)',
+                    }}
+                />
+                <img
+                    src={Imagebg.src}
+                    alt="Hero"
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full object-cover z-0"
+                    style={{ opacity: 0 }}
+                    onLoad={(e) => {
+                        e.currentTarget.style.opacity = 1;
+                        e.currentTarget.style.transition = 'opacity 1s ease-out';
+                    }}
+                />
+                <div className="absolute inset-0 bg-black/40 z-10"></div>
                 <motion.div
-                    className="relative z-10 px-4 md:px-10 text-white"
+                    className="relative z-20 px-4 md:px-10 text-white"
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
@@ -61,11 +77,29 @@ const Projects = () => {
                             className="bg-white shadow-sm"
                             variants={cardVariants}
                         >
-                            {/* Image */}
-                            <div
-                                className="h-60 bg-cover bg-center"
-                                style={{ backgroundImage: `url(${project.image})` }}
-                            ></div>
+                            {/* Lazy Load Blur Image */}
+                            <div className="relative h-60 overflow-hidden">
+                                {/* Blur background */}
+                                <div
+                                    className="absolute inset-0 bg-cover bg-center"
+                                    style={{
+                                        backgroundImage: `url(${project.image.replace(/'/g, '')}&blur=50)`,
+                                        filter: 'blur(20px)',
+                                        transform: 'scale(1.1)',
+                                    }}
+                                />
+                                {/* Actual Image */}
+                                <img
+                                    src={project.image.replace(/'/g, '')}
+                                    alt={project.title}
+                                    loading="lazy"
+                                    className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
+                                    style={{ opacity: 0 }}
+                                    onLoad={(e) => {
+                                        e.currentTarget.style.opacity = 1;
+                                    }}
+                                />
+                            </div>
 
                             {/* Info */}
                             <div className="bg-gray-100 p-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
@@ -75,7 +109,9 @@ const Projects = () => {
                                         <span>{project.year}</span>
                                         <span>{project.country}</span>
                                     </div>
-                                    <p className="text-sm text-gray-700">{project.description}</p>
+                                    <p className="text-sm text-gray-700">
+                                        Sustainable architectural innovation reimagining urban living.
+                                    </p>
                                 </div>
 
                                 <button

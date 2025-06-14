@@ -4,8 +4,8 @@ import Carousel from '../components/carousel/Carousel';
 import AboutPreview from '../components/about/Aboutpreview';
 import Servicepreview from '../components/services/Servicepreview';
 import Testimonials from '../components/testimonial/Testimonial';
-import Loader from '../components/Loader'; // ✅ Import Loader
-import homeImage from '../../src/assets/images/home-img.jpg';
+import Loader from '../components/Loader';
+import homeImage from '../../src/assets/images/home-img.webp';
 
 const Home = () => {
     const [loading, setLoading] = useState(true);

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
-import bannerImage from '../assets/images/about-banner.jpg';
-import aboutImage from '../assets/images/about-hero.jpg';
-import aboutContent from '../assets/images/about-content.jpg';
+import bannerImage from '../assets/images/about-banner.webp';
+import aboutImage from '../assets/images/about-hero.webp';
+import aboutContent from '../assets/images/about-content.webp';
 import TeamSection from '../components/team/Teamsection';
 import CountUp from 'react-countup';
 import { Link } from 'react-router-dom';

@@ -1,24 +1,90 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaCheckCircle, FaSearch, FaCalendarAlt } from 'react-icons/fa';
 import CountUp from 'react-countup';
 import Designflow from '../components/designflow/Designflow';
 
-import bannerImage from '../assets/images/servicesImg/banner.jpg';
-import animeImg1 from '../assets/images/servicesImg/anime-Img.jpg';
-import animeImg2 from '../assets/images/servicesImg/concept-img.jpg';
-import animeImg3 from '../assets/images/servicesImg/dev-img.jpg';
-import animeImg4 from '../assets/images/servicesImg/interior-img.jpg';
-import animeImg5 from '../assets/images/servicesImg/renovation-img.jpg';
-import animeImg6 from '../assets/images/servicesImg/residential-img.jpg';
+
+import bannerImage from '../assets/images/servicesImg/banner.webp';
+import animeImg1 from '../assets/images/servicesImg/anime-Img.webp?lqip';
+import animeImg2 from '../assets/images/servicesImg/concept-img.webp?lqip';
+import animeImg3 from '../assets/images/servicesImg/dev-img.webp?lqip';
+import animeImg4 from '../assets/images/servicesImg/interior-img.webp?lqip';
+import animeImg5 from '../assets/images/servicesImg/renovation-img.webp?lqip';
+import animeImg6 from '../assets/images/servicesImg/residential-img.webp?lqip';
 
 const services = [
-    // ... same service array
+    {
+        title: 'Concept Art',
+        price: 'Starting at $499',
+        desc: 'Capture the essence of your vision with stunning anime-inspired concept sketches.',
+        image: animeImg2,
+        features: ['High-detail sketches', 'Color palettes', 'Client revisions'],
+    },
+    {
+        title: '3D Development',
+        price: 'From $899',
+        desc: 'Turn your dream world into vivid 3D reality, blending fantasy and function.',
+        image: animeImg3,
+        features: ['3D modeling', 'Virtual walkthroughs', 'Interactive revisions'],
+    },
+    {
+        title: 'Interior Design',
+        price: 'Tailored Quotes',
+        desc: 'Anime-themed interiors crafted for beauty, mood, and immersion.',
+        image: animeImg4,
+        features: ['Mood boards', 'Material selection', 'Color harmony'],
+    },
+    {
+        title: 'Residential Spaces',
+        price: 'Starts at $1,999',
+        desc: 'Create character-filled homes with a unique anime aesthetic.',
+        image: animeImg6,
+        features: ['Custom layouts', 'Lighting design', 'Client collaboration'],
+    },
+    {
+        title: 'Renovation & Revamp',
+        price: 'Custom Pricing',
+        desc: 'Breathe new anime life into your old spaces through expert renovation.',
+        image: animeImg5,
+        features: ['Space assessment', 'Design upgrade', 'Thematic transformation'],
+    },
+    {
+        title: 'Anime Architecture',
+        price: 'Premium Plans',
+        desc: 'Architectural designs influenced by anime cities, homes & landscapes.',
+        image: animeImg1,
+        features: ['Full blueprints', 'Permit-ready drawings', 'Style consistency'],
+    },
 ];
 
 const Services = () => {
+    const [loaded, setLoaded] = useState([]);
+    const refs = useRef([]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = parseInt(entry.target.dataset.index);
+                        setLoaded((prev) => [...new Set([...prev, index])]);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.2 }
+        );
+
+        refs.current.forEach((el) => {
+            if (el) observer.observe(el);
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <div className="overflow-x-hidden font-barlow">
-            {/* ✅ Intro Banner */}
+            {/* Banner */}
             <div
                 className="relative text-white h-[75vh] md:h-[100vh] flex flex-col justify-center items-center px-4 sm:px-6 md:px-20 text-center"
                 style={{
@@ -33,10 +99,8 @@ const Services = () => {
                         Designing Tomorrow&apos;s Spaces
                     </h2>
                     <p className="text-sm md:text-lg text-[#CCCCCC] mb-10">
-                        Where anime aesthetics meet architectural excellence. Transform your world with our unique design philosophy that brings fantasy to life.
+                        Where anime aesthetics meet architectural excellence.
                     </p>
-
-                    {/* ✅ Stats Section */}
                     <div className="flex flex-wrap justify-center gap-8 mb-10 text-white">
                         <div className="flex flex-col items-center">
                             <h3 className="text-3xl font-bold">
@@ -57,8 +121,6 @@ const Services = () => {
                             <p className="text-sm">Support</p>
                         </div>
                     </div>
-
-                    {/* ✅ Buttons */}
                     <div className="flex flex-col sm:flex-row justify-center gap-4">
                         <a
                             href="#services"
@@ -78,19 +140,28 @@ const Services = () => {
                 </div>
             </div>
 
-            {/* ✅ Services Cards */}
+            {/* Services Section */}
             <section id="services" className="bg-[#0F0F1A] text-white py-20 px-4 sm:px-6 md:px-16">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto">
                     {services.map((service, index) => (
                         <div
                             key={index}
+                            data-index={index}
+                            ref={(el) => (refs.current[index] = el)}
                             className="w-full sm:max-w-md mx-auto rounded-2xl overflow-hidden shadow-lg bg-[#1C1C29]"
                         >
-                            <img
-                                src={service.image}
-                                alt={service.title}
-                                className="w-full h-48 sm:h-56 object-cover"
-                            />
+                            <div className="w-full h-48 sm:h-56 overflow-hidden">
+                                <div
+                                    className="w-full h-full bg-center bg-cover transition-all duration-1000 ease-out"
+                                    style={{
+                                        backgroundImage: `url(${loaded.includes(index)
+                                            ? service.image.src
+                                            : service.image.lqip
+                                            })`,
+                                        filter: loaded.includes(index) ? 'blur(0px)' : 'blur(10px)',
+                                    }}
+                                ></div>
+                            </div>
                             <div className="p-6">
                                 <div className="mb-2 text-sm text-[#f0fdff] uppercase">{service.price}</div>
                                 <h3 className="text-xl font-bold mb-2">{service.title}</h3>
@@ -112,10 +183,8 @@ const Services = () => {
                 </div>
             </section>
 
-            {/* ✅ Design Flow Component */}
             <Designflow />
 
-            {/* ✅ Final Call to Action */}
             <section className="bg-[#0f0f1a] py-20 px-4 sm:px-6 text-white text-center">
                 <div className="max-w-3xl mx-auto">
                     <h2 className="text-3xl md:text-5xl font-bold mb-6">
@@ -123,7 +192,6 @@ const Services = () => {
                     </h2>
                     <p className="text-[#CCCCCC] text-sm md:text-lg mb-8">
                         Let's discuss your vision and create something extraordinary together.
-                        Your anime-inspired architectural journey starts with a simple conversation.
                     </p>
                     <a
                         href="/contact"

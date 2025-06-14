@@ -1,4 +1,4 @@
-import bgImage from '../../assets/images/team-img.jpg';
+import bgImage from '../../assets/images/team-img.webp?lqip';
 
 const team = [
     {
