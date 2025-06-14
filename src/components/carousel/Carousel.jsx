@@ -9,8 +9,8 @@ import 'swiper/css/pagination';
 // ✅ Local assets
 import slide1 from '../../assets/images/img1.jpg';
 import slide3 from '../../assets/images/img2.jpg';
-import video1 from '../../assets/vedios/sample.mov';
-import video2 from '../../assets/vedios/sample2.mov';
+import video1 from '../../assets/vedios/sample.mp4';
+import video2 from '../../assets/vedios/sample2.mp4';
 
 const Carousel = () => {
     return (
