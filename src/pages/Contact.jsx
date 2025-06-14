@@ -2,19 +2,28 @@ import React from 'react';
 import contactImage from '../../src/assets/images/contact-img.webp';
 import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
 import Imagebg from '../assets/images/about-content.webp';
+import { Helmet } from 'react-helmet';
 
 const Contact = () => {
     return (
         <>
-            {/* ✅ Contact Form Section */}
+            <Helmet>
+                <title>Contact Us | Rock Dezign</title>
+                <meta name="description" content="Get in touch with Rock Dezign to start your dream project today." />
+                <meta name="keywords" content="contact, get in touch, Rock Dezign, architecture firm, anime design" />
+                <meta name="author" content="Rock Dezign" />
+                <meta property="og:title" content="Contact Us | Rock Dezign" />
+                <meta property="og:description" content="Reach out to Rock Dezign to bring your anime-inspired design ideas to life." />
+            </Helmet>
+
             <section
                 className="relative min-h-screen pt-20 px-4 sm:px-6 md:px-20 flex flex-col font-barlow md:flex-row bg-cover bg-center"
                 style={{ backgroundImage: `url(${Imagebg})` }}
             >
-                {/* Dark Overlay */}
+
                 <div className="absolute inset-0 bg-black/40 z-0" />
 
-                {/* Left Image */}
+
                 <div className="md:w-1/2 w-full h-60 md:h-auto relative z-10">
                     <img
                         src={contactImage}
@@ -24,7 +33,6 @@ const Contact = () => {
                     />
                 </div>
 
-                {/* Right Form */}
                 <div className="md:w-1/2 w-full p-6 md:p-12 flex flex-col justify-center relative z-10 bg-white/90 backdrop-blur-sm">
                     <h2 className="text-3xl font-bold text-[#003152] mb-2">Let’s Get In Touch.</h2>
                     <p className="mb-6 text-gray-600 text-sm sm:text-base">
@@ -77,7 +85,7 @@ const Contact = () => {
                 </div>
             </section>
 
-            {/* ✅ Reach Out Details Section */}
+
             <div className="bg-white py-16 px-4 sm:px-6 md:px-20">
                 <div className="text-center md:text-left">
                     <h2 className="text-3xl md:text-4xl font-bold mb-2">
