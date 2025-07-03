@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiMenu, HiX } from 'react-icons/hi';
+import logo from '../../assets/images/logo.png';
+import moblogo from '../../assets/images/mobilelogo.png';
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -23,8 +25,8 @@ const Navbar = () => {
             {/* Main navbar content */}
             <div className="flex justify-between items-center max-w-7xl font-barlow mx-auto px-6 py-4">
                 {/* Logo */}
-                <div className={`text-2xl font-bold ${scrolled ? 'text-[#003152]' : 'text-white'}`}>
-                    <Link to="/">Rock Dezign</Link>
+                <div className={` ${scrolled ? 'text-[#003152]' : 'text-white'}`}>
+                    <Link to="/"><img src={logo} className='h-10 w-auto' /></Link>
                 </div>
 
                 {/* Desktop Nav */}

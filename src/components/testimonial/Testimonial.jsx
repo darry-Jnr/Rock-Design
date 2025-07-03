@@ -64,7 +64,7 @@ export default function Testimonials() {
                 <h2 className="text-3xl font-bold text-center mb-10">What Our Clients Say</h2>
 
                 {/* ✅ Added ml-10 mr-10 */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ml-10 mr-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:ml-10 md:mr-10">
                     {visibleTestimonials().map((t, idx) => (
                         <div
                             key={idx}

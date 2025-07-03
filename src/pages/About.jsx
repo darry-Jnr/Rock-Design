@@ -101,7 +101,7 @@ const About = () => {
                         About Rock Dezign
                     </h1>
                     <div className="grid md:grid-cols-2 gap-10 items-center">
-                        <motion.div className="ml-10" initial={{ scale: 0.9 }} whileInView={{ scale: 1 }} transition={{ duration: 0.8 }}>
+                        <motion.div className="md:ml-10" initial={{ scale: 0.9 }} whileInView={{ scale: 1 }} transition={{ duration: 0.8 }}>
                             <img
                                 src={aboutImage}
                                 alt="About Rock Dezign"
@@ -135,7 +135,7 @@ const About = () => {
                     className="py-20 px-6 bg-white"
                 >
                     <div className="max-w-6xl mx-auto grid md:grid-cols-2 border-t border-b border-gray-200">
-                        <div className="p-8">
+                        <div className="md:p-8">
                             <h3 className="text-sm font-semibold text-[#310A51] tracking-widest mb-1">A.01</h3>
                             <h2 className="text-xl font-bold text-[#310A51] mb-4">OUR VISION</h2>
                             <div className="bg-[#003152] text-white p-6 mb-4">
@@ -151,7 +151,7 @@ const About = () => {
                                 We cultivate a team armed with cutting-edge design skills, creating captivating, sustainable, and future-proof solutions for our clients.
                             </p>
                         </div>
-                        <div className="p-8 border-l border-gray-200">
+                        <div className="md:p-8 pt-8 border-l border-gray-200">
                             <h3 className="text-sm font-semibold text-[#310A51] tracking-widest mb-1">A.02</h3>
                             <h2 className="text-xl font-bold text-[#310A51] mb-4">OUR MISSION</h2>
                             <div className="bg-[#f4f4f4] text-[#003152] p-6 mb-4">
