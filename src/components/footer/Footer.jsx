@@ -1,6 +1,9 @@
 import { SlSocialFacebook } from "react-icons/sl";
 import { FaPinterestP, FaInstagram, FaYoutube, FaArrowUp } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
+import logo from '../../assets/images/faviconn.png';
+import moblogo from '../../assets/images/mobilelogo.png';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
     const scrollToTop = () => {
@@ -13,7 +16,7 @@ const Footer = () => {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-10 mb-8">
                 {/* Logo */}
                 <div>
-                    <h2 className="text-white text-xl font-bold mb-4 sm:mb-0">Rock Dezign</h2>
+                    <Link to="/"><img src={logo} className='h-10 w-auto' /></Link>
                 </div>
 
                 {/* Social Icons + Back to Top */}
