@@ -14,48 +14,72 @@ import animeImg5 from '../assets/images/servicesImg/renovation-img.webp?lqip';
 import animeImg6 from '../assets/images/servicesImg/residential-img.webp?lqip';
 
 const services = [
-    {
-        title: 'Concept Art',
-        price: 'Starting at $499',
-        desc: 'Capture the essence of your vision with stunning anime-inspired concept sketches.',
-        image: animeImg2,
-        features: ['High-detail sketches', 'Color palettes', 'Client revisions'],
-    },
-    {
-        title: '3D Development',
-        price: 'From $899',
-        desc: 'Turn your dream world into vivid 3D reality, blending fantasy and function.',
-        image: animeImg3,
-        features: ['3D modeling', 'Virtual walkthroughs', 'Interactive revisions'],
-    },
-    {
-        title: 'Interior Design',
-        price: 'Tailored Quotes',
-        desc: 'Anime-themed interiors crafted for beauty, mood, and immersion.',
-        image: animeImg4,
-        features: ['Mood boards', 'Material selection', 'Color harmony'],
-    },
-    {
-        title: 'Residential Spaces',
-        price: 'Starts at $1,999',
-        desc: 'Create character-filled homes with a unique anime aesthetic.',
-        image: animeImg6,
-        features: ['Custom layouts', 'Lighting design', 'Client collaboration'],
-    },
-    {
-        title: 'Renovation & Revamp',
-        price: 'Custom Pricing',
-        desc: 'Breathe new anime life into your old spaces through expert renovation.',
-        image: animeImg5,
-        features: ['Space assessment', 'Design upgrade', 'Thematic transformation'],
-    },
-    {
-        title: 'Anime Architecture',
-        price: 'Premium Plans',
-        desc: 'Architectural designs influenced by anime cities, homes & landscapes.',
-        image: animeImg1,
-        features: ['Full blueprints', 'Permit-ready drawings', 'Style consistency'],
-    },
+  {
+    title: 'Residential Design',
+    price: 'Starting at $499',
+    desc: 'We create comfortable, stylish, and functional homes that reflect your lifestyle and needs.',
+    image: animeImg2,
+    features: [
+      'Custom floor plans',
+      'Interior and exterior design concepts',
+      'Client-focused revisions',
+    ],
+  },
+  {
+    title: 'Commercial Architecture',
+    price: 'From $899',
+    desc: 'Designing modern commercial spaces that balance creativity, functionality, and efficiency.',
+    image: animeImg3,
+    features: [
+      'Office layouts and retail planning',
+      '3D visualization',
+      'Efficient space utilization',
+    ],
+  },
+  {
+    title: 'Interior Design',
+    price: 'Tailored Quotes',
+    desc: 'Transforming interiors with unique styles that blend aesthetics and practicality.',
+    image: animeImg4,
+    features: [
+      'Mood boards and themes',
+      'Material and furniture selection',
+      'Lighting and color planning',
+    ],
+  },
+  {
+    title: '3D Visualization',
+    price: 'Starts at $1,999',
+    desc: 'Bring your ideas to life with photorealistic 3D renders and walkthroughs.',
+    image: animeImg6,
+    features: [
+      'Detailed 3D modeling',
+      'Lighting and textures',
+      'Virtual project walkthroughs',
+    ],
+  },
+  {
+    title: 'Luxury Design',
+    price: 'Custom Pricing',
+    desc: 'Exclusive designs for high-end residences and commercial spaces with a premium touch.',
+    image: animeImg5,
+    features: [
+      'Personalized concepts',
+      'Premium material selection',
+      'Attention to fine details',
+    ],
+  },
+  {
+    title: 'Renovation and Remodeling',
+    price: 'Premium Plans',
+    desc: 'Revamp existing spaces with modern design solutions tailored to your needs.',
+    image: animeImg1,
+    features: [
+      'Full redesign plans',
+      'Structural improvements',
+      'Contemporary styling',
+    ],
+  },
 ];
 
 const Services = () => {
@@ -97,60 +121,26 @@ const Services = () => {
 
             <div className="overflow-x-hidden font-barlow">
                 {/* Banner */}
-                <div
-                    className="relative text-white h-[75vh] md:h-[100vh] flex flex-col justify-center items-center px-4 sm:px-6 md:px-20 text-center"
-                    style={{
-                        backgroundImage: `url(${bannerImage})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                >
-                    <div className="absolute inset-0 bg-black/60 z-0" />
-                    <div className="relative z-10 max-w-3xl">
-                        <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4 text-white">
-                            Designing Tomorrow&apos;s Spaces
-                        </h2>
-                        <p className="text-sm md:text-lg text-[#CCCCCC] mb-10">
-                            Where anime aesthetics meet architectural excellence.
-                        </p>
-                        <div className="flex flex-wrap justify-center gap-8 mb-10 text-white">
-                            <div className="flex flex-col items-center">
-                                <h3 className="text-3xl font-bold">
-                                    <CountUp end={6} duration={2} />
-                                </h3>
-                                <p className="text-sm">Core Services</p>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <h3 className="text-3xl font-bold">
-                                    <CountUp end={200} duration={2} />+
-                                </h3>
-                                <p className="text-sm">Happy Clients</p>
-                            </div>
-                            <div className="flex flex-col items-center">
-                                <h3 className="text-3xl font-bold">
-                                    <CountUp end={24} duration={1.5} />/<CountUp end={7} duration={1.5} />
-                                </h3>
-                                <p className="text-sm">Support</p>
-                            </div>
-                        </div>
-                        <div className="flex flex-col sm:flex-row justify-center gap-4">
-                            <a
-                                href="#services"
-                                className="inline-flex items-center justify-center gap-2 px-6 py-2 bg-white text-black rounded-full font-medium hover:bg-gray-200 transition"
-                            >
-                                <FaSearch className="text-sm" />
-                                Explore Services
-                            </a>
-                            <a
-                                href="/contact"
-                                className="inline-flex items-center justify-center gap-2 px-6 py-2 border border-white text-white rounded-full font-medium hover:bg-white hover:text-black transition"
-                            >
-                                <FaCalendarAlt className="text-sm" />
-                                Schedule Consultation
-                            </a>
-                        </div>
-                    </div>
-                </div>
+       <div
+  className="relative text-white h-[60vh] sm:h-[70vh] md:h-[75vh] flex justify-center items-center px-4 sm:px-6 md:px-20"
+  style={{
+    backgroundImage: `url(${bannerImage})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  }}
+>
+  {/* Gradient overlay for cinematic effect */}
+  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-0" />
+
+
+<h1
+  className="absolute bottom-4 left-4 font-barlow text-2xl md:text-4xl font-semibold text-white leading-snug tracking-tight"
+>
+ Expertise
+</h1>
+
+</div>
+
 
                 {/* Services Section */}
                 <section id="services" className="bg-[#0F0F1A] text-white py-20 px-4 sm:px-6 md:px-16">

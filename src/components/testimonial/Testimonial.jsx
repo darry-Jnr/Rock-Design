@@ -1,113 +1,148 @@
 import React, { useState, useEffect } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
 
 const testimonials = [
-    {
-        name: "Amaka Johnson",
-        role: "Homeowner",
-        rating: 4.9,
-        image: "https://randomuser.me/api/portraits/women/65.jpg",
-    },
-    {
-        name: "Chuka Eze",
-        role: "Real Estate Developer",
-        rating: 4.8,
-        image: "https://randomuser.me/api/portraits/men/75.jpg",
-    },
-    {
-        name: "Sarah Opoku",
-        role: "Interior Enthusiast",
-        rating: 4.9,
-        image: "https://randomuser.me/api/portraits/women/68.jpg",
-    },
-    {
-        name: "David Akin",
-        role: "Land Investor",
-        rating: 4.7,
-        image: "https://randomuser.me/api/portraits/men/72.jpg",
-    },
-    {
-        name: "Ngozi Daniels",
-        role: "NGO Office Manager",
-        rating: 4.8,
-        image: "https://randomuser.me/api/portraits/women/63.jpg",
-    },
-    {
-        name: "Tunde Bakare",
-        role: "Tech Hub Founder",
-        rating: 5.0,
-        image: "https://randomuser.me/api/portraits/men/78.jpg",
-    },
+  {
+    quote: "Rock Dezign completely transformed our office space. Their team brought creativity and precision to every detail. We couldn’t be happier!",
+    name: "Amaka Johnson",
+    role: "Homeowner",
+    company: "Rock Dezign",
+    image: "https://tinyurl.com/bddbvswe",
+    rating: 5,
+  },
+  {
+    quote: "They delivered our dream home exactly as envisioned. Professional, punctual, and highly skilled team. Highly recommended!",
+    name: "Chuka Eze",
+    role: "Real Estate Developer",
+    company: "Eze Properties",
+    image: "https://tinyurl.com/4k67p8aa",
+    rating: 4.9,
+  },
+  {
+    quote: "Amazing attention to detail and superb execution. They understood our vision perfectly and brought it to life!",
+    name: "Sarah Opoku",
+    role: "Interior Enthusiast",
+    company: "Opoku Designs",
+    image: "https://tinyurl.com/44jh4ux8",
+    rating: 4.8,
+  },
+  {
+    quote: "The team at Rock Dezign made our renovation process effortless. Their communication and creativity were top-notch!",
+    name: "David Akin",
+    role: "Land Investor",
+    company: "Akin Ventures",
+    image: "https://tinyurl.com/4wwy3rz9",
+    rating: 4.7,
+  },
 ];
 
-export default function Testimonials() {
-    const [showAll, setShowAll] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+const Carousel = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768); // md breakpoint
-        };
-        handleResize();
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
+  // Auto-slide every 10 seconds (optional)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Use the modulo operator for an infinite loop
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, 10000); // 10 seconds
 
-    const visibleTestimonials = () => {
-        if (showAll) return testimonials;
-        return isMobile ? testimonials.slice(0, 2) : testimonials.slice(0, 3);
-    };
+    // Clear the interval when the component unmounts
+    return () => clearInterval(interval);
+  }, []);
 
-    return (
-        <section className="bg-[#0F0F1A] py-12 px-6 text-white font-barlow">
-            <div className="max-w-7xl mx-auto">
-                <h2 className="text-3xl font-bold text-center mb-10">What Our Clients Say</h2>
+  const prevSlide = () => {
+    // Loop back to the end of the array if at the beginning
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
-                {/* ✅ Added ml-10 mr-10 */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:ml-10 md:mr-10">
-                    {visibleTestimonials().map((t, idx) => (
-                        <div
-                            key={idx}
-                            className="bg-[#1C1C29] rounded-xl p-6 shadow-md hover:shadow-lg transition"
-                        >
-                            <p className="text-sm text-gray-300 mb-6">
-                                <span className="text-xl text-gray-400 mr-2">“</span>
-                                Rock Dezign turned my vision into a masterpiece. From concept to completion,
-                                their team brought clarity, precision, and creativity that exceeded expectations.
-                            </p>
+  const nextSlide = () => {
+    // Loop back to the beginning of the array if at the end
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                    <img
-                                        src={t.image}
-                                        alt={t.name}
-                                        className="w-10 h-10 rounded-full object-cover"
-                                    />
-                                    <div>
-                                        <h4 className="font-semibold">{t.name}</h4>
-                                        <p className="text-sm text-gray-400">{t.role}</p>
-                                    </div>
-                                </div>
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
 
-                                <div className="flex items-center gap-1 bg-gray-800 px-2 py-1 rounded-full">
-                                    <span className="text-sm">{t.rating}</span>
-                                    <FaStar className="text-orange-400 fill-orange-400 w-4 h-4" />
-                                </div>
-                            </div>
-                        </div>
+  return (
+    <section className="bg-white py-16 px-4 flex flex-col items-center justify-center font-barlow text-gray-700">
+      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
+        What Our Clients Say
+      </h2>
+
+      <div className="relative w-full max-w-4xl overflow-hidden">
+        {/* Carousel Track */}
+        <div
+          className="flex transition-transform ease-in-out duration-[1000ms]"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {testimonials.map((t, index) => (
+            <div
+              key={index}
+              className="w-full flex-shrink-0 text-center px-4 md:px-8"
+            >
+              <p className="text-lg md:text-xl italic leading-relaxed text-gray-700 font-serif max-w-2xl mx-auto mb-6">
+                “{t.quote}”
+              </p>
+
+              <div className="flex flex-col items-center justify-center">
+                <img
+                  src={t.image}
+                  alt={t.name}
+                  className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-gray-300"
+                />
+                <div>
+                  <p className="font-semibold uppercase tracking-wide">
+                    {t.name}, {t.role}
+                  </p>
+                  <p className="uppercase tracking-wide text-sm text-gray-500 mb-2">
+                    {t.company}
+                  </p>
+                  <div className="flex justify-center gap-1">
+                    {[...Array(5)].map((_, i) => (
+                      <FaStar
+                        key={i}
+                        className={`w-4 h-4 ${
+                          i < Math.round(t.rating) ? "text-yellow-400" : "text-gray-300"
+                        }`}
+                      />
                     ))}
+                  </div>
                 </div>
-
-                {/* Show more / less */}
-                <div className="text-center mt-8">
-                    <button
-                        onClick={() => setShowAll(!showAll)}
-                        className="text-sm text-white"
-                    >
-                        {showAll ? "Show Less ↑" : "See More →"}
-                    </button>
-                </div>
+              </div>
             </div>
-        </section>
-    );
-}
+          ))}
+        </div>
+
+        {/* Arrows */}
+        <button
+          onClick={prevSlide}
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors z-10"
+        >
+          <FaChevronLeft className="text-gray-700 w-5 h-5" />
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors z-10"
+        >
+          <FaChevronRight className="text-gray-700 w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Dots */}
+      <div className="flex justify-center mt-6 gap-3">
+        {testimonials.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => goToSlide(idx)}
+            className={`w-3 h-3 rounded-full transition-colors duration-300 ${
+              idx === currentIndex ? "bg-gray-700" : "bg-gray-300"
+            }`}
+          ></button>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+export default Carousel;

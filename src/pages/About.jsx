@@ -1,10 +1,8 @@
 import { motion } from 'framer-motion';
-import bannerImage from '../assets/images/about-banner.webp';
+import bannerImage from '../assets/images/aboutus.webp';
 import aboutImage from '../assets/images/about-hero.webp';
 import aboutContent from '../assets/images/about-content.webp';
 import TeamSection from '../components/team/Teamsection';
-import CountUp from 'react-countup';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import {
     FaPlay,
@@ -35,59 +33,22 @@ const About = () => {
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 1 }}
-                    className="relative text-white min-h-[60vh] md:min-h-[100vh] px-6 text-center flex flex-col justify-center items-center"
+                    className="relative text-white min-h-[60vh] md:min-h-[75vh] px-6 text-center flex flex-col justify-center items-center"
                     style={{
                         backgroundImage: `url(${bannerImage})`,
                         backgroundSize: 'cover',
                         backgroundPosition: 'center',
                     }}
                 >
-                    <div className="absolute inset-0 bg-black/60 z-0"></div>
-                    <motion.div className="relative z-10 max-w-4xl mx-auto" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
-                        <p className="text-md pt:8 md:block md:text-lg max-w-xl mx-auto text-white/90 mb-8">
-                            Solving human needs through architecture that listens, inspires, and transforms.
-                        </p>
+                    <div className="absolute inset-0 bg-black/60 z-0">
+<h1
+  className="absolute bottom-4 left-4 font-barlow text-2xl md:text-4xl font-semibold text-white leading-snug tracking-tight"
+>
+  About
+</h1>
 
-
-                        <motion.div
-                            className="flex justify-center items-center gap-6 mt-6 text-white text-center md:grid md:grid-cols-3 md:gap-6"
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8 }}
-                        >
-                            <div>
-                                <h2 className="text-4xl font-bold">
-                                    <CountUp end={150} duration={2} />+
-                                </h2>
-                                <p className="text-sm mt-1 text-white/90">Projects Completed</p>
-                            </div>
-                            <div>
-                                <h2 className="text-4xl font-bold">
-                                    <CountUp end={25} duration={2} />+
-                                </h2>
-                                <p className="text-sm mt-1 text-white/90">Awards Won</p>
-                            </div>
-                            <div>
-                                <h2 className="text-4xl font-bold">
-                                    <CountUp end={8} duration={2} />
-                                </h2>
-                                <p className="text-sm mt-1 text-white/90">Years Experience</p>
-                            </div>
-                        </motion.div>
-
-
-                        <motion.div className="mt-20" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
-                            <Link
-                                to="/projects"
-                                className="inline-flex items-center gap-2 px-6 py-2 border border-white text-white rounded-full hover:bg-white hover:text-black transition duration-300"
-                            >
-                                <FaPlay className="text-sm" />
-                                Explore Our Work
-                            </Link>
-                        </motion.div>
-                    </motion.div>
-                </motion.div>
+                    </div>
+                  </motion.div>
 
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
@@ -110,18 +71,36 @@ const About = () => {
                         </motion.div>
                         <motion.div className="mr-10 text-gray-600 space-y-6 text-md leading-relaxed" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ duration: 1 }}>
                             <p>
-                                Rock Dezign is an architectural and design company dedicated to enriching the world
-                                with stunning masterpieces. We cultivate a team armed with cutting-edge design skills,
-                                creating captivating, sustainable, and future-proof solutions.
+                               At Rock Dezign, we focus 
+on deep listening, 
+innovative design, and 
+creating enduring 
+structures. Based in 
+Nigeria, we are a team of 
+professional architects 
+and designers delivering 
+sustainable solutions 
+across residential, 
+commercial, and cultural 
+projects.
                             </p>
                             <p>
-                                We envision a world where design addresses existing, emerging, and future challenges.
-                                By researching human behavior and social needs, we craft designs that transcend expectations.
+                               Our work spans homes, 
+workplaces, interiors, and 
+large-scale 
+developments, each 
+shaped by a commitment 
+to quality, functionality, 
+and timeless design. With 
+a balance of global 
+perspective and local 
+understanding, we create 
+architecture and spaces 
+that serve people today 
+and remain relevant for 
+generations.
                             </p>
-                            <p>
-                                Every detail is purposeful: from divine inspiration to long-term thinking and collaborative
-                                excellence. At Rock Dezign, we don’t just build spaces — we build solutions.
-                            </p>
+                            
                         </motion.div>
                     </div>
                 </motion.div>

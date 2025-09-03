@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import projectData from '../data/projectData';
 import { Helmet } from 'react-helmet';
@@ -35,7 +35,8 @@ const Projects = () => {
 
             <div className="bg-white">
 
-                <div className="relative h-[300px] md:h-[450px] font-barlow overflow-x-hidden flex items-center">
+                <div className="relative h-[300px] md:h-[450px] font-barlow flex items-center overflow-hidden">
+
                     <div
                         className="absolute inset-0 bg-cover bg-center"
                         style={{
@@ -73,7 +74,7 @@ const Projects = () => {
 
 
                 <div className="py-16 px-4 sm:px-6">
-                    <h2 className="text-2xl md:text-4xl font-semibold text-[#003152] mb-10">
+                    <h2 className="text-2xl md:text-4xl font-barlow text-[#003152] mb-10">
                         Our Projects
                     </h2>
 
@@ -85,57 +86,39 @@ const Projects = () => {
                         viewport={{ once: true, amount: 0.2 }}
                     >
                         {projectData.map((project) => (
-                            <motion.div
-                                key={project.id}
-                                className="bg-white shadow-sm"
-                                variants={cardVariants}
-                            >
+  <motion.div
+    key={project.id}
+    variants={cardVariants}
+  >
+    <Link
+      to={`/projects/${project.id}`}
+      className="block bg-white shadow-sm rounded overflow-hidden hover:shadow-lg transition"
+    >
+      {/* Image Section */}
+      <div className="relative h-60 overflow-hidden group">
+        <img
+          src={project.image.replace(/'/g, '')}
+          alt={project.title}
+          className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-30 transition"></div>
+      </div>
 
-                                <div className="relative h-60 overflow-hidden">
+      {/* Info Section */}
+      <div className="p-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
+        <div className="text-left mb-4 sm:mb-0">
+          <h3 className="text-xl font-semibold text-[#003152] mb-1">{project.title}</h3>
+          <div className="flex gap-4 text-sm text-gray-600 mb-2">
+            <span>{project.year}</span>
+            <span>{project.country}</span>
+          </div>
+        </div>
 
-                                    <div
-                                        className="absolute inset-0 bg-cover bg-center"
-                                        style={{
-                                            backgroundImage: `url(${project.image.replace(/'/g, '')}&blur=50)`,
-                                            filter: 'blur(20px)',
-                                            transform: 'scale(1.1)',
-                                        }}
-                                    />
+      </div>
+    </Link>
+  </motion.div>
+))}
 
-                                    <img
-                                        src={project.image.replace(/'/g, '')}
-                                        alt={project.title}
-                                        loading="lazy"
-                                        className="absolute inset-0 w-full h-full object-cover transition-opacity duration-500"
-                                        style={{ opacity: 0 }}
-                                        onLoad={(e) => {
-                                            e.currentTarget.style.opacity = 1;
-                                        }}
-                                    />
-                                </div>
-
-
-                                <div className="bg-gray-100 p-4 flex flex-col sm:flex-row sm:justify-between items-start sm:items-center">
-                                    <div className="text-left mb-4 sm:mb-0">
-                                        <h3 className="text-xl font-semibold text-[#003152] mb-1">{project.title}</h3>
-                                        <div className="flex gap-4 text-sm text-gray-600 mb-2">
-                                            <span>{project.year}</span>
-                                            <span>{project.country}</span>
-                                        </div>
-                                        <p className="text-sm text-gray-700">
-                                            Sustainable architectural innovation reimagining urban living.
-                                        </p>
-                                    </div>
-
-                                    <button
-                                        className="w-10 h-10 flex items-center justify-center bg-gray-500 text-white rounded-full hover:bg-[#00223d] transition"
-                                        onClick={() => { }}
-                                    >
-                                        <FaArrowRight className="w-4 h-4" />
-                                    </button>
-                                </div>
-                            </motion.div>
-                        ))}
                     </motion.div>
 
 

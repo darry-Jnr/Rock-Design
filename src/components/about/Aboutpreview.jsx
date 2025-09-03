@@ -53,7 +53,16 @@ const AboutPreview = () => {
                     </h2>
 
                     <p className="text-gray-700 text-md md:text-lg mb-4">
-                        At Rock Dezign, we believe that true design begins with listening — deeply and intentionally — to human needs. Rooted in divine inspiration, our mission is to create architectural masterpieces that are both functional and timeless.
+                        At Rock Dezign, we 
+focus on Deep listening, 
+innovative design, and 
+solid build.
+ We are a team of 
+professional designers 
+based in Nigeria; 
+delivering sustainable 
+design solutions around 
+the world. 
                     </p>
 
                     <p className="text-gray-600 text-sm md:text-md mb-8">

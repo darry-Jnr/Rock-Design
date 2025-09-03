@@ -39,7 +39,7 @@ const Carousel = () => {
                         </SwiperSlide>
                     ))}
 
-                    {/* ✅ Image Slides with Lazy Loading */}
+                   
                     {[slide1, slide3].map((src, index) => (
                         <SwiperSlide key={`img-${index}`}>
                             <img
@@ -52,14 +52,17 @@ const Carousel = () => {
                     ))}
                 </Swiper>
 
-                {/* ✅ Text Overlay */}
+              
                 <div className="absolute inset-0 z-10 bg-black/50 flex flex-col items-center justify-center text-center text-white px-4">
-                    <h1 className="text-3xl md:text-5xl font-bold mb-4">
-                        Inspiring Architecture
-                    </h1>
-                    <p className="text-md md:text-xl max-w-2xl">
+  <h1
+  className="absolute bottom-4 left-4 font-barlow text-2xl md:text-4xl font-semibold text-white leading-snug tracking-tight"
+>
+  We listen, we design, we build
+</h1>
+
+                    {/* <p className="text-md md:text-xl max-w-2xl">
                         Spaces that speak your vision — built with purpose and precision.
-                    </p>
+                    </p> */}
                 </div>
             </div>
 
