@@ -3,38 +3,33 @@
 const projectData = [
     {
         id: 1,
-        title: "South Sabah Al-Ahmad Masterplan",
-        image: "'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop'",
-        year: 2040,
-        country: "Southern Kuwait, Kuwait",
+        title: "Panthers",
+        image: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240315/panthers-1_alxlp7.webp",
+        country: " Residential Development, Idaho"
     },
     {
         id: 2,
-        title: "Neo Tokyo Vertical Farm",
-        image: "'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop'",
-        year: 2035,
+        title: "LLc Califonia",
+        image: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240319/des2_xq4ntf.jpg",
         country: "Tokyo, Japan",
     },
     {
         id: 3,
-        title: "Cairo Eco Housing",
-        image: "'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop'",
-        year: 2029,
+        title: "Porto Rico",
+        image: "/src/assets/images/projects/panthers/panthers-1.webp",
         country: "Cairo, Egypt",
     },
     {
         id: 4,
-        title: "Urban Zen Pavilion",
-        image: "'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop'",
-        year: 2030,
+        title: "Vincent Mount",
+        image: "/src/assets/images/projects/panthers/panthers-1.webp",
         country: "Seoul, South Korea",
     },
     {
         id: 5,
-        title: "Lakeview Sustainability Center",
-        image: "'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop'",
-        year: 2038,
-        country: "Toronto, Canada",
+        title: "Kulima Schools",
+        image: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240322/Red_1_oyg9mi.webp",
+        country: "Montessori Design For Kulima Schools, Georgia",
     }
 ];
 

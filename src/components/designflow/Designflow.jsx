@@ -1,115 +1,73 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { FaRegComments, FaDraftingCompass, FaHammer, FaEye, FaLightbulb } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
-// ✅ Images with LQIP
-import design1 from '../../assets/images/designImg/consultation.webp?lqip';
-import design2 from '../../assets/images/designImg/concept.webp?lqip';
-import design3 from '../../assets/images/designImg/design.webp?lqip';
-import design4 from '../../assets/images/designImg/construction.webp?lqip';
-import design5 from '../../assets/images/designImg/final.webp?lqip';
 
 const steps = [
-    {
-        id: 1,
-        title: 'Initial Consultation',
-        description: 'Discuss your vision and anime inspirations',
-        icon: <FaRegComments className="text-white text-2xl" />,
-        bg: design1,
-    },
-    {
-        id: 2,
-        title: 'Concept Design',
-        description: 'Create detailed sketches and 3D visualizations',
-        icon: <FaDraftingCompass className="text-white text-2xl" />,
-        bg: design2,
-    },
-    {
-        id: 3,
-        title: 'Design Development',
-        description: 'Refine details and select materials',
-        icon: <FaLightbulb className="text-white text-2xl" />,
-        bg: design3,
-    },
-    {
-        id: 4,
-        title: 'Construction',
-        description: 'Bring your anime world to life',
-        icon: <FaHammer className="text-white text-2xl" />,
-        bg: design4,
-    },
-    {
-        id: 5,
-        title: 'Final Reveal',
-        description: 'Step into your completed anime',
-        icon: <FaEye className="text-white text-2xl" />,
-        bg: design5,
-    },
+    { id: '01', title: 'Consultation', desc: 'Understanding your vision and spatial needs.', img: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240278/consultation_g6vcag.webp" },
+    { id: '02', title: 'Concept', desc: 'Translating ideas into technical sketches.', img: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240281/concept_fqutoi.webp" },
+    { id: '03', title: 'Development', desc: 'Refining details and material selection.', img: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240281/design_wzzifz.webp" },
+    { id: '04', title: 'Construction', desc: 'Precision engineering and management.', img: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240275/construction_esikqm.webp" },
+    { id: '05', title: 'The Reveal', desc: 'Handover of your bespoke environment.', img: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240281/final_h3whnw.webp" },
 ];
 
-const Designflow = () => {
-    const [loaded, setLoaded] = useState([]);
-    const refs = useRef([]);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        const index = parseInt(entry.target.dataset.index);
-                        setLoaded((prev) => [...new Set([...prev, index])]);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            },
-            { threshold: 0.2 }
-        );
-
-        refs.current.forEach((el) => {
-            if (el) observer.observe(el);
-        });
-
-        return () => observer.disconnect();
-    }, []);
-
+const DesignFlow = () => {
     return (
-        <div className="py-10 md:ml-10 md:mr-10 font-barlow">
-            <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold mb-2">Our Design Process</h2>
-                <p className="text-lg max-w-2xl mx-auto">
-                    From concept to completion, we guide you through every step of creating your dream space
-                </p>
-            </div>
+        <section className="py-32 bg-[#fcfcfc] overflow-hidden">
+            <div className="max-w-[1800px] mx-auto px-6 md:px-20">
+                
+                {/* Header */}
+                <div className="mb-24">
+                    <span className="text-[#003152] text-xs font-bold tracking-[0.5em] uppercase block mb-4">Methodology</span>
+                    <h2 className="text-5xl md:text-7xl font-light text-[#003152] tracking-tighter leading-none">
+                        The Design <span className="italic font-serif text-gray-400">Sequence.</span>
+                    </h2>
+                </div>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
-                {steps.map((step, index) => (
-                    <div
-                        key={step.id}
-                        data-index={index}
-                        ref={(el) => (refs.current[index] = el)}
-                        className="relative h-[180px] sm:h-[220px] w-full text-white overflow-hidden"
-                    >
-                        <div
-                            className="absolute inset-0 bg-center bg-cover transition-all duration-1000 ease-out"
-                            style={{
-                                backgroundImage: `url(${loaded.includes(index) ? step.bg.src : step.bg.lqip
-                                    })`,
-                                filter: loaded.includes(index) ? 'blur(0px)' : 'blur(10px)',
-                            }}
-                        />
-                        <div className="absolute inset-0 bg-black/50"></div>
+                {/* Flow Wrapper */}
+                <div className="grid grid-cols-1 md:grid-cols-5 gap-0 border-t border-gray-100">
+                    {steps.map((step, index) => (
+                        <motion.div 
+                            key={step.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: index * 0.1 }}
+                            className="group relative pt-12 pb-20 md:border-r border-gray-100 last:border-r-0 md:px-8 first:pl-0"
+                        >
+                            {/* Step Number */}
+                            <span className="text-[60px] font-serif italic text-gray-50 absolute top-4 left-0 -z-10 group-hover:text-gray-100 transition-colors duration-500">
+                                {step.id}
+                            </span>
 
-                        <div className="relative z-10 h-full flex flex-col justify-between p-5">
-                            <div className="flex items-center gap-3">
-                                <div className="bg-[#003152] p-2 rounded-full">{step.icon}</div>
-                                <h3 className="text-lg font-bold">{step.title}</h3>
+                            <div className="relative z-10">
+                                <h3 className="text-xl font-bold text-[#003152] tracking-tight mb-4 uppercase">
+                                    {step.title}
+                                </h3>
+                                <p className="text-sm text-gray-500 leading-relaxed font-light mb-8 max-w-[200px]">
+                                    {step.desc}
+                                </p>
+
+                                {/* Interactive Image Reveal */}
+                                <div className="relative w-full aspect-[3/4] overflow-hidden group-hover:grayscale-0 transition-all duration-1000">
+                                    <img 
+                                        src={step.img} 
+                                        alt={step.title} 
+                                        className="w-full h-full object-cover scale-110 group-hover:scale-100 transition-transform duration-1000"
+                                    />
+                                    <div className="absolute inset-0 bg-[#003152]/10 mix-blend-multiply  group-hover:opacity-100 transition-opacity" />
+                                </div>
                             </div>
-                            <div className="text-sm text-white/80">{step.description}</div>
-                        </div>
-                    </div>
-                ))}
+
+                            {/* Technical Progress Line (Mobile hidden) */}
+                            <div className="hidden md:block absolute top-0 left-0 w-full h-[2px] bg-transparent overflow-hidden">
+                                <div className="w-full h-full bg-[#003152] -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out" />
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
-        </div>
+        </section>
     );
 };
 
-export default Designflow;
+export default DesignFlow;

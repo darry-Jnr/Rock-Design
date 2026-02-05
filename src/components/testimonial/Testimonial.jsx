@@ -1,145 +1,99 @@
 import React, { useState, useEffect } from "react";
-import { FaChevronLeft, FaChevronRight, FaStar } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const testimonials = [
   {
-    quote: "Rock Dezign completely transformed our office space. Their team brought creativity and precision to every detail. We couldn’t be happier!",
+    quote: "Rock Dezign completely transformed our office space. Their team brought creativity and precision to every detail.",
     name: "Amaka Johnson",
-    role: "Homeowner",
-    company: "Rock Dezign",
-    image: "https://tinyurl.com/bddbvswe",
-    rating: 5,
+    role: "Principal Architect",
+    company: "Lagos Design Collective",
   },
   {
-    quote: "They delivered our dream home exactly as envisioned. Professional, punctual, and highly skilled team. Highly recommended!",
+    quote: "They delivered our dream home exactly as envisioned. Professional, punctual, and highly skilled team.",
     name: "Chuka Eze",
-    role: "Real Estate Developer",
+    role: "Director",
     company: "Eze Properties",
-    image: "https://tinyurl.com/4k67p8aa",
-    rating: 4.9,
   },
   {
     quote: "Amazing attention to detail and superb execution. They understood our vision perfectly and brought it to life!",
     name: "Sarah Opoku",
-    role: "Interior Enthusiast",
+    role: "Founding Partner",
     company: "Opoku Designs",
-    image: "https://tinyurl.com/44jh4ux8",
-    rating: 4.8,
-  },
-  {
-    quote: "The team at Rock Dezign made our renovation process effortless. Their communication and creativity were top-notch!",
-    name: "David Akin",
-    role: "Land Investor",
-    company: "Akin Ventures",
-    image: "https://tinyurl.com/4wwy3rz9",
-    rating: 4.7,
-  },
+  }
 ];
 
 const Carousel = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(0);
 
-  // Auto-slide every 10 seconds (optional)
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Use the modulo operator for an infinite loop
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 10000); // 10 seconds
-
-    // Clear the interval when the component unmounts
-    return () => clearInterval(interval);
-  }, []);
-
-  const prevSlide = () => {
-    // Loop back to the end of the array if at the beginning
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
-  const nextSlide = () => {
-    // Loop back to the beginning of the array if at the end
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-  };
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
+  const nextSlide = () => setIndex((prev) => (prev + 1) % testimonials.length);
+  const prevSlide = () => setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <section className="bg-white py-16 px-4 flex flex-col items-center justify-center font-barlow text-gray-700">
-      <h2 className="text-3xl md:text-4xl font-bold mb-12 text-center">
-        What Our Clients Say
-      </h2>
-
-      <div className="relative w-full max-w-4xl overflow-hidden">
-        {/* Carousel Track */}
-        <div
-          className="flex transition-transform ease-in-out duration-[1000ms]"
-          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        >
-          {testimonials.map((t, index) => (
-            <div
-              key={index}
-              className="w-full flex-shrink-0 text-center px-4 md:px-8"
-            >
-              <p className="text-lg md:text-xl italic leading-relaxed text-gray-700 font-serif max-w-2xl mx-auto mb-6">
-                “{t.quote}”
-              </p>
-
-              <div className="flex flex-col items-center justify-center">
-                <img
-                  src={t.image}
-                  alt={t.name}
-                  className="w-20 h-20 rounded-full object-cover mb-4 border-2 border-gray-300"
-                />
-                <div>
-                  <p className="font-semibold uppercase tracking-wide">
-                    {t.name}, {t.role}
-                  </p>
-                  <p className="uppercase tracking-wide text-sm text-gray-500 mb-2">
-                    {t.company}
-                  </p>
-                  <div className="flex justify-center gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar
-                        key={i}
-                        className={`w-4 h-4 ${
-                          i < Math.round(t.rating) ? "text-yellow-400" : "text-gray-300"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+    <section className="bg-[#fcfcfc] py-32 px-6 md:px-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto relative">
+        
+        {/* Decorative Background Quote */}
+        <div className="absolute -top-10 -left-10 text-[200px] font-serif text-gray-100 leading-none select-none">
+          “
         </div>
 
-        {/* Arrows */}
-        <button
-          onClick={prevSlide}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors z-10"
-        >
-          <FaChevronLeft className="text-gray-700 w-5 h-5" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors z-10"
-        >
-          <FaChevronRight className="text-gray-700 w-5 h-5" />
-        </button>
-      </div>
+        <div className="relative z-10 grid md:grid-cols-12 items-center gap-12">
+          
+          {/* 1. Header Column */}
+          <div className="md:col-span-4">
+            <span className="text-[#003152] text-xs font-bold tracking-[0.5em] uppercase block mb-4">
+              Voices
+            </span>
+            <h2 className="text-4xl md:text-6xl font-light text-[#003152] tracking-tighter leading-none mb-8">
+              Client <br /><span className="italic font-serif">Perspectives.</span>
+            </h2>
+            
+            {/* Custom Navigation */}
+            <div className="flex gap-4 mt-12">
+              <button 
+                onClick={prevSlide}
+                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#003152] hover:bg-[#003152] hover:text-white transition-all duration-500"
+              >
+                <FiArrowLeft />
+              </button>
+              <button 
+                onClick={nextSlide}
+                className="w-12 h-12 rounded-full border border-gray-200 flex items-center justify-center text-[#003152] hover:bg-[#003152] hover:text-white transition-all duration-500"
+              >
+                <FiArrowRight />
+              </button>
+            </div>
+          </div>
 
-      {/* Dots */}
-      <div className="flex justify-center mt-6 gap-3">
-        {testimonials.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => goToSlide(idx)}
-            className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-              idx === currentIndex ? "bg-gray-700" : "bg-gray-300"
-            }`}
-          ></button>
-        ))}
+          {/* 2. Content Column */}
+          <div className="md:col-span-8 min-h-[400px] flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.6, ease: "circOut" }}
+                className="space-y-8"
+              >
+                <p className="text-2xl md:text-4xl font-light text-[#003152] leading-tight tracking-tight italic font-serif">
+                  "{testimonials[index].quote}"
+                </p>
+                
+                <div className="pt-8 border-t border-gray-100">
+                  <h4 className="text-lg font-medium text-[#003152]">
+                    {testimonials[index].name}
+                  </h4>
+                  <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mt-1">
+                    {testimonials[index].role} — {testimonials[index].company}
+                  </p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+        </div>
       </div>
     </section>
   );

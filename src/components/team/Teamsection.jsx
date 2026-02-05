@@ -1,75 +1,100 @@
-import bgImage from '../../assets/images/team-img.webp?lqip';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const team = [
     {
         name: 'Akira Tanaka',
         role: 'Founder & Lead Architect',
-        bio: 'Passionate about merging anime aesthetics with modern architecture. 15+ years of experience in innovative design.',
         specialty: 'Cyberpunk & Futuristic Design',
-        image: 'https://images.unsplash.com/photo-1603415526960-f8f0b4f0f63e?auto=format&fit=crop&w=400&q=80',
+        image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770257182/team3_jxzrts.webp'
     },
     {
         name: 'Yuki Sato',
         role: 'Senior Interior Designer',
-        bio: 'Expert in creating immersive interior experiences inspired by Studio Ghibli and slice-of-life anime.',
         specialty: 'Natural & Whimsical Interiors',
-        image: 'https://images.pexels.com/photos/3777946/pexels-photo-3777946.jpeg?auto=compress&cs=tinysrgb&h=350',
+        image: 'https://images.pexels.com/photos/3777946/pexels-photo-3777946.jpeg?auto=compress&cs=tinysrgb&h=800',
     },
     {
         name: 'Hiroshi Nakamura',
         role: 'Project Manager',
-        bio: 'Ensures every project runs smoothly from concept to completion with precision and care.',
         specialty: 'Project Coordination',
-        image: 'https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&h=350',
+               image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770257183/team4_ysonq3.webp'
     },
     {
         name: 'Sakura Yamamoto',
         role: '3D Visualization Artist',
-        bio: 'Brings architectural dreams to life through stunning 3D renders and virtual walkthroughs.',
         specialty: '3D Renders & Visual Effects',
-        image: 'https://images.unsplash.com/photo-1594824476967-48c8b9642731?auto=format&fit=crop&w=400&q=80',
+              image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770257182/team1_tcfcjj.webp'
     },
 ];
 
 const TeamSection = () => {
     return (
-        <section
-            className="relative bg-cover bg-center bg-no-repeat font-barlow py-20 px-6 text-white"
-            style={{ backgroundImage: `url(${bgImage})` }}
-        >
-            {/* Overlay */}
-            <div className="absolute inset-0 bg-black/70"></div>
-
-            <div className="relative z-10 max-w-7xl mx-auto">
-                <div className="text-center mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                        Meet Our Creative Team
-                    </h2>
-                    <p className="max-w-2xl mx-auto text-gray-300 text-md md:text-lg">
-                        Our passionate team of architects, designers, and visionaries who bring anime worlds to life.
+        <section className="bg-white py-32 px-6 md:px-20">
+            <div className="max-w-7xl mx-auto">
+                {/* Header Section */}
+                <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                    <div className="max-w-xl">
+                        <span className="text-[#003152] text-xs font-bold tracking-[0.5em] uppercase block mb-4">The Collective</span>
+                        <h2 className="text-4xl md:text-6xl font-light text-[#003152] tracking-tighter leading-none">
+                            Architects of <span className="italic font-serif">Imagination.</span>
+                        </h2>
+                    </div>
+                    <p className="text-gray-400 text-sm max-w-xs uppercase tracking-widest leading-loose">
+                        A multidisciplinary group of visionaries redefining the boundary between space and story.
                     </p>
                 </div>
 
-                {/* Unified White Card with Vertical Dividers */}
-                <div className="bg-white/90 backdrop-blur shadow-lg overflow-hidden">
-                    <div className="flex flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-gray-300">
-                        {team.map((member, index) => (
-                            <div key={index} className="p-6 flex-1 text-center text-[#003152]">
+                {/* Team Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+                    {team.map((member, index) => (
+                        <motion.div 
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: index * 0.1 }}
+                            viewport={{ once: true }}
+                            className="group cursor-crosshair"
+                        >
+                            {/* Image Container */}
+                            <div className="relative aspect-[3/4] overflow-hidden mb-6">
                                 <img
                                     src={member.image}
                                     alt={member.name}
-                                    className="w-24 h-24 object-cover rounded-full mx-auto mb-4 ring-2 ring-[#003152]"
+                                    className="w-full h-full object-cover  group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                                 />
-                                <h3 className="text-lg font-semibold">{member.name}</h3>
-                                <p className="text-sm text-gray-600 mb-2">{member.role}</p>
-                                <p className="text-sm text-gray-700 mb-4">{member.bio}</p>
-                                <span className="inline-block text-xs font-medium px-3 py-1 bg-[#003152] text-white rounded-full">
-                                    {member.specialty}
-                                </span>
+                                {/* Subtle info overlay on hover */}
+                                <div className="absolute transition-opacity duration-500"></div>
                             </div>
-                        ))}
-                    </div>
+
+                            {/* Text Info */}
+                            <div className="space-y-1">
+                                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-[0.2em]">
+                                    {member.role}
+                                </p>
+                                <h3 className="text-xl font-medium text-[#003152] tracking-tight group-hover:italic transition-all">
+                                    {member.name}
+                                </h3>
+                                <div className="pt-4 overflow-hidden">
+                                    <p className="text-xs text-gray-500 font-light translate-y-0 group-hover:text-[#003152] transition-colors duration-300">
+                                        Specializing in {member.specialty}
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
+
+                {/* Optional: Recruitment Link */}
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    className="mt-32 pt-12 border-t border-gray-100 flex justify-center"
+                >
+                    <a href="#" className="text-xs font-bold tracking-[0.4em] text-[#003152] uppercase hover:opacity-50 transition">
+                        Join the Studio — Careers
+                    </a>
+                </motion.div>
             </div>
         </section>
     );

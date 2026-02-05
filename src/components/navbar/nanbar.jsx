@@ -1,221 +1,183 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { HiMenu, HiX } from "react-icons/hi";
-import { FiSearch } from "react-icons/fi";
-import { FaPinterestP, FaInstagram, FaYoutube, FaChevronRight } from "react-icons/fa";
-import { CiLinkedin } from "react-icons/ci";
-import { SlSocialFacebook } from "react-icons/sl";
-import { FaArrowUp } from "react-icons/fa6";
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { HiMenuAlt4, HiX } from 'react-icons/hi';
+import { FiSearch } from 'react-icons/fi';
 import logo from "../../assets/images/faviconn.png";
 import logotext from "../../assets/images/logoblack.png";
-
-// Centralized data for the search overlay
-const searchData = {
-  categories: [
-    { name: "All", count: 20 },
-    { name: "Projects", count: 50 },
-    { name: "News", count: 20 },
-    { name: "Video", count: 240 },
-    { name: "People", count: 50 },
-    
-  ],
-  recommendedSearches: [
-    { title: "Urban Architecture Concepts" },
-    { title: "Sustainable Office Designs" },
-    { title: "Industrial Equipment Innovations" },
-    { title: "Smart Home Automation Systems" },
-    { title: "Corporate Branding Strategies" },
-    { title: "AI-driven Product Development" },
-  ],
-};
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+
+  // 1. Context Logic: Define which pages start with a White background
+  const isLightPage = ['/projects', '/services', '/contact'].includes(location.pathname);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-    
+  // 2. State Logic: Navbar is "Dark Mode" (Dark text/White bg) if scrolled OR on a light page
+  const isDarkNav = scrolled || isLightPage;
+
+  const navLinks = [
+    { name: "The Studio", path: "/about" },
+    { name: "Expertise", path: "/services" },
+    { name: "Projects", path: "/projects" },
+    { name: "Inquire", path: "/contact" },
+  ];
+
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scrolled ? "bg-white shadow-md" : "bg-transparent"
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 px-6 md:px-12 py-6 ${
+          isDarkNav 
+            ? "bg-white/95 backdrop-blur-md py-4 border-b border-gray-100 shadow-sm" 
+            : "bg-transparent"
         }`}
       >
-        <div className="flex justify-between items-center max-w-7xl mx-auto px-6 py-4">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <Link to="/">
-              <img src={logo} className="h-10 w-auto" alt="Logo" />
-            </Link>
-            <img
-              src={logotext}
-              alt="logo-text"
-              className={`h-8 w-auto transition-all duration-300 ${
-                scrolled ? "filter-none" : "filter invert"
-              }`}
-            />
-            
-          </div>
+        <div className="max-w-[1800px] mx-auto flex justify-between items-center">
+        <Link to="/" className="flex items-center gap-3 group">
+  {/* Logo stays original color, but we add a subtle drop-shadow 
+      so it's visible even on dark images */}
+  <img 
+    src={logo} 
+    className="h-8 w-auto transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)]" 
+    alt="Logo" 
+  />
+  <img 
+    src={logotext} 
+    alt="logo-text" 
+    className="h-6 w-auto hidden md:block transition-all duration-500 drop-shadow-[0_2px_10px_rgba(255,255,255,0.2)]" 
+  />
+</Link>
 
-          {/* Right side: Search + Menu */}
-          <div className="flex items-center space-x-4">
-            <FiSearch
+          <div className="flex items-center gap-8">
+            {/* Search Trigger */}
+            <button 
               onClick={() => setSearchOpen(true)}
-              className={`text-2xl cursor-pointer ${
-                scrolled ? "text-gray-800" : "text-white"
-              }`}
-            />
-            <button onClick={() => setMenuOpen(true)}>
-              <HiMenu
-                className={`w-7 h-7 ${
-                  scrolled ? "text-gray-800" : "text-white"
-                }`}
-              />
+              className={`text-xl transition-colors duration-300 ${isDarkNav ? "text-[#003152]" : "text-white"} hover:opacity-50`}
+            >
+              <FiSearch />
+            </button>
+
+            {/* Menu Trigger */}
+            <button onClick={() => setMenuOpen(true)} className="group flex items-center gap-3">
+              <span className={`text-[10px] font-bold tracking-[0.4em] uppercase transition-colors duration-300 ${isDarkNav ? "text-[#003152]" : "text-white"}`}>
+                Menu
+              </span>
+              <HiMenuAlt4 className={`text-3xl ${isDarkNav ? "text-[#003152]" : "text-white"}`} />
             </button>
           </div>
         </div>
-
-        {/* Overlay Menu */}
-        {menuOpen && (
-          <div
-            className="fixed inset-0 h-full w-full bg-white z-50 flex flex-col justify-between shadow-lg md:w-1/2 md:right-0 md:left-auto"
-          >
-            {/* Header inside overlay */}
-            <div className="flex justify-end items-center px-6 py-4 space-x-4">
-              <FiSearch
-                onClick={() => {
-                  setSearchOpen(true);
-                  setMenuOpen(false); // Close the menu when opening the search overlay
-                }}
-                className="text-2xl cursor-pointer text-gray-800"
-              />
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-gray-300 hover:bg-black transition"
-              >
-                <HiX className="w-6 h-6 text-gray-800 hover:text-white" />
-              </button>
-            </div>
-
-            {/* Menu links */}
-            <div className="flex flex-col space-y-8 px-10 mt-6 mb-10 text-3xl font-barlow">
-              <span className="text-sm font-semibold tracking-wider text-gray-400">
-                MENU
-              </span>
-              <Link to="/about" onClick={() => setMenuOpen(false)}>
-                About
-              </Link>
-              <Link to="/services" onClick={() => setMenuOpen(false)}>
-                Expertise
-              </Link>
-              <Link to="/projects" onClick={() => setMenuOpen(false)}>
-                Projects
-              </Link>
-              <Link to="/contact" onClick={() => setMenuOpen(false)}>
-                Contact
-              </Link>
-            </div>
-
-            {/* Sidebar Footer */}
-            <div className="px-10 py-6 border-t border-gray-200">
-              <div className="flex space-x-4 mb-4 text-gray-600">
-                <a href="#" className="hover:text-black">
-                  <FaPinterestP size={18} />
-                </a>
-                <a href="#" className="hover:text-black">
-                  <FaInstagram size={18} />
-                </a>
-                <a href="#" className="hover:text-black">
-                  <CiLinkedin size={20} />
-                </a>
-                <a href="#" className="hover:text-black">
-                  <FaYoutube size={20} />
-                </a>
-                <a href="#" className="hover:text-black">
-                  <SlSocialFacebook size={18} />
-                </a>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <p className="text-xs text-gray-500">
-                  © {new Date().getFullYear()} Rock Design Studio
-                </p>
-                <button
-                  onClick={scrollToTop}
-                  className="p-2 rounded-full border border-gray-300 hover:bg-black transition"
-                >
-                  <FaArrowUp
-                    className="text-gray-700 hover:text-white"
-                    size={14}
-                  />
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Search Overlay - Conditional Rendering */}
-        {searchOpen && (
-          <div className="fixed inset-0 bg-white z-50 flex flex-col p-4 md:p-8 font-sans md:left-1/2 md:w-1/2 md:h-full md:shadow-lg">
-            {/* Top bar with logo and close icon */}
-            <div className="flex justify-between items-center mb-8">
-             <Link to="/">
-               <img src={logotext} className="h-10 w-auto" alt="Logo" />
-             </Link>
-              <button onClick={() => setSearchOpen(false)} className="p-2">
-                <HiX className="text-gray-800 text-3xl" />
-              </button>
-            </div>
-
-            {/* Search Input */}
-            <div className="flex items-center mb-6 border-b border-gray-400 pb-2">
-              <input
-                type="text"
-                placeholder="Type here to search"
-                className="w-full text-2xl md:text-3xl text-gray-800 focus:outline-none placeholder-gray-400"
-              />
-            </div>
-
-            {/* Categories and counts */}
-            <div className="flex flex-wrap text-sm md:text-base font-medium text-gray-600 mb-6 gap-2">
-              {searchData.categories.map((category, index) => (
-                <span
-                  key={index}
-                  className={`${category.name === "All" ? "text-black" : "hover:text-black cursor-pointer"}`}
-                >
-                  {category.name}{" "}
-                  <span className="text-red-500">{category.count}</span>
-                </span>
-              ))}
-            </div>
-
-            {/* Recommended searches */}
-            <div className="flex flex-col space-y-4">
-              <h3 className="text-lg md:text-xl text-gray-800 mb-2">Recommended searches</h3>
-              {searchData.recommendedSearches.map((item, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="flex items-center text-gray-600 hover:text-black transition-colors duration-200"
-                >
-                  <FaChevronRight className="mr-2 text-red-500 text-sm" />
-                  <span className="text-sm md:text-base">{item.title}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-        )}
       </nav>
+
+      {/* OVERLAY BACKGROUND */}
+      <AnimatePresence>
+        {(menuOpen || searchOpen) && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => { setMenuOpen(false); setSearchOpen(false); }}
+            className="fixed inset-0 z-[150] bg-black/40 backdrop-blur-sm"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* FULL-HEIGHT SIDE MENU */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 200 }}
+            className="fixed right-0 top-0 h-screen w-full md:w-[50%] lg:w-[40%] z-[200] bg-white text-[#003152] shadow-2xl flex flex-col p-10 md:p-16"
+          >
+            <div className="flex justify-between items-center">
+              <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-gray-300">Navigation</span>
+              <button onClick={() => setMenuOpen(false)} className="group flex items-center gap-3">
+                <span className="text-[10px] font-bold tracking-[0.4em] uppercase">Close</span>
+                <HiX className="text-3xl group-hover:rotate-90 transition-transform duration-500" />
+              </button>
+            </div>
+
+            <div className="flex-1 flex flex-col justify-center">
+              <div className="flex flex-col space-y-2">
+                {navLinks.map((link, i) => (
+                  <Link
+                    key={i}
+                    to={link.path}
+                    onClick={() => setMenuOpen(false)}
+                    className="text-5xl md:text-7xl font-light tracking-tighter hover:italic hover:translate-x-4 transition-all duration-500 block py-4 border-b border-gray-50 last:border-0"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="border-t border-gray-100 pt-10 grid grid-cols-2 gap-8">
+              <div>
+                <p className="text-[9px] font-bold tracking-widest text-gray-300 uppercase mb-4">Connect</p>
+                <div className="flex flex-col gap-2 text-sm font-medium">
+                  <a href="#" className="hover:text-blue-600 transition">Instagram</a>
+                  <a href="#" className="hover:text-blue-600 transition">LinkedIn</a>
+                </div>
+              </div>
+              <div>
+                <p className="text-[9px] font-bold tracking-widest text-gray-300 uppercase mb-4">Studio</p>
+                <p className="text-sm font-light text-gray-500 leading-relaxed">
+                  Victoria Island, <br /> Lagos, Nigeria
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* SEARCH OVERLAY */}
+      <AnimatePresence>
+        {searchOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 200 }}
+            className="fixed right-0 top-0 h-screen w-full md:w-[50%] lg:w-[40%] z-[200] bg-[#fcfcfc] shadow-2xl flex flex-col p-10 md:p-16"
+          >
+            <div className="flex justify-end mb-20">
+              <button onClick={() => setSearchOpen(false)} className="text-3xl hover:rotate-90 transition-transform duration-500">
+                <HiX />
+              </button>
+            </div>
+            <div className="w-full">
+              <input 
+                autoFocus
+                type="text" 
+                placeholder="Search archive..." 
+                className="w-full text-4xl font-light tracking-tighter border-b border-gray-200 pb-4 bg-transparent outline-none focus:border-[#003152] transition-colors"
+              />
+              <div className="mt-16">
+                <h4 className="text-[10px] font-bold tracking-widest uppercase text-gray-300 mb-8">Quick Links</h4>
+                <ul className="space-y-6 text-xl font-light">
+                  {['Residential', 'Commercial', 'Visualization'].map((item) => (
+                    <li key={item} className="group cursor-pointer flex items-center gap-4 hover:translate-x-2 transition-transform">
+                      <div className="w-6 h-[1px] bg-gray-200 group-hover:w-10 group-hover:bg-[#003152] transition-all" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 };

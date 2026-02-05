@@ -1,110 +1,106 @@
 import React from 'react';
-import { FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
+import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
+import { FiArrowRight, FiMail, FiMapPin, FiPhone } from 'react-icons/fi';
 
 const Contact = () => {
   return (
-    <>
+    <div className="bg-white">
       <Helmet>
-        <title>Contact Us | Rock Dezign</title>
-        <meta
-          name="description"
-          content="Get in touch with Rock Dezign to start your dream project today."
-        />
-        <meta
-          name="keywords"
-          content="contact, get in touch, Rock Dezign, architecture firm, anime design"
-        />
-        <meta name="author" content="Rock Dezign" />
-        <meta property="og:title" content="Contact Us | Rock Dezign" />
-        <meta
-          property="og:description"
-          content="Reach out to Rock Dezign to bring your anime-inspired design ideas to life."
-        />
+        <title>Inquiry & Consultation | Rock Dezign</title>
       </Helmet>
 
-      {/* Hero Section - Text Only */}
-      <section className="relative min-h-[50vh] md:min-h-[70vh] pt-8 md:pt-28 px-4 sm:px-6 md:px-12 flex flex-col justify-center items-start font-barlow bg-[#f5f5f5] ">
-        <h1 className="text-4xl md:text-5xl font-barlow text-[#003152] mb-4 animate-fadeIn">
-          Let’s Get In Touch ✨
-        </h1>
-        <p className="text-gray-700 text-base sm:text-lg mb-6 animate-fadeIn delay-200">
-          Have a project in mind? Or just want to say hello? Reach out using the
-          details below — we’d love to hear from you!
-        </p>
+      {/* 1. HERO SECTION - BLACK & WHITE SPLIT LOOK */}
+      <section className="relative mt-8 min-h-[80vh] flex flex-col md:flex-row border-b border-gray-100">
+        <div className="w-full md:w-1/2 bg-[#003152] flex flex-col justify-center px-8 md:px-20 py-20">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="text-white/50 text-xs font-bold tracking-[0.5em] uppercase mb-6 block">
+              Contact
+            </span>
+            <h1 className="text-5xl md:text-8xl font-light text-white tracking-tighter leading-none mb-8">
+              Let's build <br /> <span className="italic font-serif font-light">the future.</span>
+            </h1>
+            <p className="text-white/70 text-lg md:text-xl font-light max-w-md leading-relaxed">
+              Whether you are looking to commission a new landmark or seeking a private consultation, our partners are ready to assist.
+            </p>
+          </motion.div>
+        </div>
 
-        <div className="space-y-4">
-          <div className="flex items-center gap-3 text-gray-800 animate-fadeIn delay-400">
-            <FiMail className="text-xl text-[#003152]" />
-            <span>hello@rockdezign.com</span>
+        {/* 2. THE CONSULTATION FORM - LUXURY STYLE */}
+        <div className="w-full md:w-1/2 bg-white flex flex-col justify-center px-8 md:px-20 py-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <h2 className="text-2xl font-light text-[#003152] uppercase tracking-widest mb-10">
+              Book a Consultation
+            </h2>
+            <form className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="border-b border-gray-200 py-2 focus-within:border-[#003152] transition">
+                  <label className="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 font-bold">Full Name</label>
+                  <input type="text" placeholder="John Doe" className="w-full outline-none text-sm placeholder:text-gray-200" />
+                </div>
+                <div className="border-b border-gray-200 py-2 focus-within:border-[#003152] transition">
+                  <label className="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 font-bold">Email Address</label>
+                  <input type="email" placeholder="john@example.com" className="w-full outline-none text-sm placeholder:text-gray-200" />
+                </div>
+              </div>
+              <div className="border-b border-gray-200 py-2 focus-within:border-[#003152] transition">
+                <label className="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 font-bold">Project Type</label>
+                <select className="w-full outline-none text-sm bg-transparent">
+                  <option>Residential Commission</option>
+                  <option>Commercial Development</option>
+                  <option>Interior Design</option>
+                  <option>Consultation Only</option>
+                </select>
+              </div>
+              <div className="border-b border-gray-200 py-2 focus-within:border-[#003152] transition">
+                <label className="block text-[10px] uppercase tracking-widest text-gray-400 mb-1 font-bold">Message</label>
+                <textarea rows="3" placeholder="Tell us about your vision..." className="w-full outline-none text-sm placeholder:text-gray-200 resize-none"></textarea>
+              </div>
+              
+              <button className="group flex items-center gap-4 bg-[#003152] text-white px-10 py-5 text-xs font-bold tracking-[0.3em] uppercase hover:bg-black transition-all">
+                Send Inquiry <FiArrowRight className="group-hover:translate-x-2 transition-transform" />
+              </button>
+            </form>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 3. GLOBAL DETAILS SECTION */}
+      <section className="py-24 px-8 md:px-20 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-20">
+          <div>
+            <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-gray-400 mb-6 border-b pb-4">Headquarters</h4>
+            <p className="text-xl font-light text-[#003152] leading-relaxed">
+              221b Architecture Street, <br />
+              Victoria Island, Lagos, Nigeria
+            </p>
           </div>
-          <div className="flex items-center gap-3 text-gray-800 animate-fadeIn delay-600">
-            <FiPhone className="text-xl text-[#003152]" />
-            <span>(+234) 906 - 000 - 0000</span>
+          <div>
+            <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-gray-400 mb-6 border-b pb-4">Direct Lines</h4>
+            <p className="text-xl font-light text-[#003152] mb-2">(+234) 906 000 0000</p>
+            <p className="text-xl font-light text-[#003152]">office@rockdezign.com</p>
           </div>
-          <div className="flex items-center gap-3 text-gray-800 animate-fadeIn delay-800">
-            <FiMapPin className="text-xl text-[#003152]" />
-            <span>221b Architecture Street, Lagos</span>
+          <div>
+            <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-gray-400 mb-6 border-b pb-4">Social</h4>
+            <div className="flex gap-6">
+              {['Instagram', 'LinkedIn', 'Behance'].map((item) => (
+                <a key={item} href="#" className="text-sm font-bold tracking-widest text-[#003152] hover:opacity-50 transition uppercase">{item}</a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Bottom Section */}
-      <div className="bg-white py-16 px-4 sm:px-6 md:px-12">
-        <div className="text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2">
-            We’d Love to Hear From You.
-          </h2>
-          <p className="text-gray-500 mb-6 text-sm sm:text-base">
-            Or just reach out manually to{' '}
-            <a
-              href="mailto:hello@rockdezign.com"
-              className="text-[#310A51] underline font-medium"
-            >
-              hello@rockdezign.com
-            </a>
-            .
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-          <div className="flex items-start gap-4">
-            <div className="bg-[#003152]/10 p-3 rounded-full">
-              <FiMail className="w-6 h-6 text-[#003152]" />
-            </div>
-            <div>
-              <h3 className="font-semibold">Email Support</h3>
-              <p className="text-gray-500 text-sm">Our team responds quickly.</p>
-              <p className="text-[#310A51] text-sm mt-1">hello@rockdezign.com</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="bg-[#003152]/10 p-3 rounded-full">
-              <FiMapPin className="w-6 h-6 text-[#003152]" />
-            </div>
-            <div>
-              <h3 className="font-semibold">Visit Our Office</h3>
-              <p className="text-gray-500 text-sm">Come meet us at our HQ.</p>
-              <p className="text-[#310A51] text-sm mt-1">
-                221b Architecture Street, Lagos
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="bg-[#003152]/10 p-3 rounded-full">
-              <FiPhone className="w-6 h-6 text-[#003152]" />
-            </div>
-            <div>
-              <h3 className="font-semibold">Call Us Directly</h3>
-              <p className="text-gray-500 text-sm">Available during working hours.</p>
-              <p className="text-[#310A51] text-sm mt-1">(+234) 906 - 000 - 0000</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
+     
+    </div>
   );
 };
 
