@@ -12,13 +12,13 @@ const services = [
         id: '01',
         title: 'Residential',
         desc: 'Bespoke living environments designed for the modern era.',
-        bg: residentialImg,
+        bg: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240254/panthers-4_ccoxej.webp",
     },
     {
         id: '02',
         title: 'Commercial',
         desc: 'Defining the corporate landscape through strategic architecture.',
-        bg: commercialImg,
+        bg: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240321/Red_2_v9xnmr.webp",
     },
     {
         id: '03',
@@ -30,7 +30,7 @@ const services = [
 
 const ServicePreview = () => {
     return (
-        <section className="py-32 bg-white">
+        <section className="py-32 ">
             {/* Header: Editorial Style */}
             <div className="max-w-7xl mx-auto mb-20 px-6 flex flex-col md:flex-row justify-between items-end gap-6">
                 <div className="max-w-xl">

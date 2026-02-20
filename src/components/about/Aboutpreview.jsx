@@ -23,7 +23,7 @@ const AboutPreview = () => {
                         
                         <div className="overflow-hidden shadow-2xl">
                             <img 
-                                src="https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770257180/aboutpreview_g00uji.webp" 
+                                src="https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240254/panthers-4_ccoxej.webp" 
                                 alt="Studio Philosophy" 
                                 className="w-full h-[500px] object-cover hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100"
                             />
@@ -50,11 +50,11 @@ const AboutPreview = () => {
                             </h2>
 
                             <div className="space-y-6 max-w-xl">
-                                <p className="text-xl md:text-2xl font-light text-[#003152] leading-relaxed">
+                                <p className="text-xl md:text-2xl font-barlow font-light text-[#003152] leading-relaxed">
                                     We are a team of professional designers based in Nigeria, delivering sustainable, world-class solutions through a process of rigorous inquiry.
                                 </p>
 
-                                <p className="text-gray-500 text-sm md:text-base leading-loose font-light">
+                                <p className="text-gray-500 text-sm font-barlow md:text-base leading-loose font-light">
                                     Every project at Rock Dezign is a dialogue. We translate social and behavioral needs into structural masterpieces that serve people today and remain relevant for generations. Our designs aren’t just structures—they are enduring solutions.
                                 </p>
                             </div>

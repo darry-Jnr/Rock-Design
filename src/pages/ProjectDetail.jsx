@@ -80,10 +80,10 @@ const ProjectDetail = () => {
       <section className="max-w-7xl mx-auto px-6 mb-32">
         <div className="grid md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
-            <h2 className="text-xs font-bold text-[#003152] uppercase tracking-[0.3em] border-b border-gray-100 pb-4">Project Overview</h2>
+            <h2 className="text-xs font-bold font-barlow text-[#003152] uppercase tracking-[0.3em] border-b border-gray-100 pb-4">Project Overview</h2>
           </div>
           <div className="md:col-span-8">
-            <p className="text-lg md:text-2xl text-gray-700 leading-relaxed font-light italic">
+            <p className="text-lg md:text-2xl font-barlow text-gray-700 leading-relaxed font-light italic">
               {project.description}
             </p>
           </div>

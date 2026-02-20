@@ -22,10 +22,10 @@ const Projects = () => {
                             transition={{ duration: 0.8 }}
                         >
                             <span className="text-[#003152] text-xs font-bold tracking-[0.4em] uppercase block mb-4">Portfolio</span>
-                            <h1 className="text-5xl md:text-8xl font-bold text-[#003152] tracking-tighter leading-[0.9]">
+                            <h1 className="text-5xl md:text-8xl font-barlow font-bold text-[#003152] tracking-tighter leading-[0.9]">
                                 Our <br /> <span className="text-gray-300">Works.</span>
                             </h1>
-                            <p className="mt-8 text-gray-500 max-w-sm text-lg font-light leading-relaxed">
+                            <p className="mt-8 font-barlow text-gray-500 max-w-sm text-lg font-light leading-relaxed">
                                 A curated collection of residential and commercial spaces designed to inspire.
                             </p>
                         </motion.div>

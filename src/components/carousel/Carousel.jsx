@@ -14,10 +14,10 @@ import video1 from '../../assets/vedios/sample.mp4';
 import video2 from '../../assets/vedios/sample2.mp4';
 
 const slides = [
-    { type: 'video', src: video1, title: 'Deep Listening.', subtitle: 'The foundation of every project.' },
-    { type: 'video', src: video2, title: 'Innovative Design.', subtitle: 'Bespoke solutions for modern life.' },
-    { type: 'image', src: slide1, title: 'Solid Build.', subtitle: 'Engineering excellence in every brick.' },
-    { type: 'image', src: slide3, title: 'Timeless Spaces.', subtitle: 'Architecture that inspires generations.' },
+    { type: 'video', src: "https://res.cloudinary.com/dwlgcj8ht/video/upload/v1771216116/Montessori_K_4_hnomlm.mp4", title: 'Deep Listening', subtitle: 'The foundation of every project.' },
+    // { type: 'video', src: video2, title: 'Innovative Design.', subtitle: 'Bespoke solutions for modern life.' },
+    // { type: 'image', src: slide1, title: 'Solid Build.', subtitle: 'Engineering excellence in every brick.' },
+    // { type: 'image', src: slide3, title: 'Timeless Spaces.', subtitle: 'Architecture that inspires generations.' },
 ];
 
 const Hero = () => {

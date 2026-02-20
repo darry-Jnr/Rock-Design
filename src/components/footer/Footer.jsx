@@ -29,8 +29,8 @@ const Footer = () => {
                     <div className="flex md:justify-end items-start">
                         <div className="text-left md:text-right">
                             <p className="text-gray-500 uppercase tracking-widest text-[10px] mb-4">General Inquiries</p>
-                            <p className="text-xl font-light italic mb-1">office@rockdezign.com</p>
-                            <p className="text-xl font-light tracking-tighter text-gray-400">(+234) 906 000 0000</p>
+                            <p className="text-xl font-light italic mb-1">info@rockdezign.com</p>
+                            <p className="text-xl font-light tracking-tighter text-gray-400">(+234) 814 269 9879</p>
                         </div>
                     </div>
                 </div>

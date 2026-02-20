@@ -69,7 +69,7 @@ const Services = () => {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.5 }}
             src={serviceList[0].image} 
-            className="w-full h-full object-cover opacity-80 mix-blend-luminosity"
+            className="w-full h-full object-cover opacity-80 "
             alt="Architecture Showcase"
           />
           {/* Overlay Decoration */}

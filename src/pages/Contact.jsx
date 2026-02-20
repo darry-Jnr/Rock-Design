@@ -21,10 +21,10 @@ const Contact = () => {
             <span className="text-white/50 text-xs font-bold tracking-[0.5em] uppercase mb-6 block">
               Contact
             </span>
-            <h1 className="text-5xl md:text-8xl font-light text-white tracking-tighter leading-none mb-8">
+            <h1 className="text-5xl font-barlow md:text-8xl font-light text-white tracking-tighter leading-none mb-8">
               Let's build <br /> <span className="italic font-serif font-light">the future.</span>
             </h1>
-            <p className="text-white/70 text-lg md:text-xl font-light max-w-md leading-relaxed">
+            <p className="text-white/70 font-barlow text-lg md:text-xl font-light max-w-md leading-relaxed">
               Whether you are looking to commission a new landmark or seeking a private consultation, our partners are ready to assist.
             </p>
           </motion.div>
@@ -85,8 +85,8 @@ const Contact = () => {
           </div>
           <div>
             <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-gray-400 mb-6 border-b pb-4">Direct Lines</h4>
-            <p className="text-xl font-light text-[#003152] mb-2">(+234) 906 000 0000</p>
-            <p className="text-xl font-light text-[#003152]">office@rockdezign.com</p>
+            <p className="text-xl font-light text-[#003152] mb-2">(+234) 814 269 9879</p>
+            <p className="text-xl font-light text-[#003152]">info@rockdezign.com</p>
           </div>
           <div>
             <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-gray-400 mb-6 border-b pb-4">Social</h4>
