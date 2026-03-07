@@ -2,10 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const stats = [
-  { label: 'Global Projects', value: '50', suffix: '+' },
-  { label: 'Square Footage', value: '750', suffix: 'k' },
-  { label: 'Design Awards', value: '12', suffix: '' },
-  { label: 'Active Countries', value: '04', suffix: '' },
+  { label: 'Projects Delievered', value: '50', suffix: '+' },
+  { label: 'Square Footage', value: '300', suffix: 'k' },
+  { label: 'Satisfied Clients', value: '80', suffix: '+' },
+  { label: 'Countries Served', value: '07', suffix: '+' },
 ];
 
 const StatsSection = () => {

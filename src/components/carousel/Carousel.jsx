@@ -3,21 +3,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
 
-// Styles
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
-import slide1 from '../../assets/images/img1.webp';
-import slide3 from '../../assets/images/img2.webp';
-import video1 from '../../assets/vedios/sample.mp4';
-import video2 from '../../assets/vedios/sample2.mp4';
-
 const slides = [
-    { type: 'video', src: "https://res.cloudinary.com/dwlgcj8ht/video/upload/v1771216116/Montessori_K_4_hnomlm.mp4", title: 'Deep Listening', subtitle: 'The foundation of every project.' },
-    // { type: 'video', src: video2, title: 'Innovative Design.', subtitle: 'Bespoke solutions for modern life.' },
-    // { type: 'image', src: slide1, title: 'Solid Build.', subtitle: 'Engineering excellence in every brick.' },
-    // { type: 'image', src: slide3, title: 'Timeless Spaces.', subtitle: 'Architecture that inspires generations.' },
+    {
+        type: 'video',
+        src: "https://res.cloudinary.com/dwlgcj8ht/video/upload/v1771216116/Montessori_K_4_hnomlm.mp4",
+        title: 'Leadership. Innovation.',
+        subtitle: 'Designing for a sustainable future.',
+    },
 ];
 
 const Hero = () => {
@@ -31,14 +27,13 @@ const Hero = () => {
                 loop={true}
                 pagination={{
                     clickable: true,
-                    renderBullet: (index, className) => {
-                        return `<span class="${className}"></span>`;
-                    },
+                    renderBullet: (index, className) => `<span class="${className}"></span>`,
                 }}
                 className="h-full w-full"
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index} className="relative overflow-hidden">
+
                         {/* Media Layer */}
                         <div className="absolute inset-0 z-0">
                             {slide.type === 'video' ? (
@@ -59,61 +54,76 @@ const Hero = () => {
                                     style={{ backgroundImage: `url(${slide.src})` }}
                                 />
                             )}
-                            {/* Cinematic Overlay: Darker at the bottom for text legibility */}
+                            {/* Gradient overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                         </div>
 
-                        {/* Text Layer: Using Swiper-Active classes to trigger animations */}
-                        <div className="relative z-20 h-full w-full flex items-end pb-24 px-6 md:px-20">
+                        {/* Text Layer */}
+                        <div className="relative z-20 h-full w-full flex items-end pb-24 px-6 md:px-16">
                             <div className="max-w-4xl">
                                 <motion.div
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 1, delay: 0.5 }}
                                 >
-                                    <span className="text-white/60 text-xs font-bold tracking-[0.6em] uppercase mb-4 block">
+                                    <span className="text-white/40 text-[10px] font-bold tracking-[0.6em] uppercase mb-6 block font-barlow">
                                         Rock Dezign Studio
                                     </span>
-                                    <h2 className="text-5xl md:text-8xl font-light text-white tracking-tighter leading-none mb-6">
-                                        {slide.title.split('.')[0]}
-                                        <span className="italic font-serif text-white/80">.</span>
-                                    </h2>
-                                    <p className="text-white/40 text-lg md:text-xl font-light tracking-widest uppercase italic">
-                                        {slide.subtitle}
+                                    <h1 className="text-5xl md:text-6xl font-light text-white tracking-tighter leading-none mb-6 font-barlow">
+                                        Leadership<span className="italic font-serif text-white/50">.</span>{' '}
+                                        Innovation<span className="italic font-serif text-white/50">.</span>
+                                    </h1>
+                                    <p className="text-white/40 text-sm font-light tracking-[0.4em] uppercase font-barlow">
+                                        Designing for a sustainable future.
                                     </p>
                                 </motion.div>
                             </div>
                         </div>
+
+                        {/* Bottom right: We listen, we design, we build — per brief */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ delay: 1.2, duration: 1 }}
+                            className="absolute bottom-24 right-6 md:right-16 z-20 text-right"
+                        >
+                            <p className="text-white/25 text-[10px] tracking-[0.35em] uppercase font-barlow leading-loose">
+                                We listen<br />We design<br />We build
+                            </p>
+                        </motion.div>
+
                     </SwiperSlide>
                 ))}
             </Swiper>
 
-            {/* Custom Pagination CSS for the "Line" look */}
-            <style>
-                {`
-                    .swiper-pagination {
-                        bottom: 40px !important;
-                        left: auto !important;
-                        right: 80px !important;
-                        width: auto !important;
-                        display: flex;
-                        gap: 15px;
-                    }
-                    .swiper-pagination-bullet {
-                        width: 40px !important;
-                        height: 2px !important;
-                        border-radius: 0 !important;
-                        background: rgba(255,255,255,0.3) !important;
-                        opacity: 1 !important;
-                        margin: 0 !important;
-                        transition: all 0.5s ease;
-                    }
-                    .swiper-pagination-bullet-active {
-                        background: #ffffff !important;
-                        width: 80px !important;
-                    }
-                `}
-            </style>
+            {/* Corner brackets */}
+            <div className="absolute top-8 right-8 w-8 h-8 border-t border-r border-white/15 z-30 pointer-events-none" />
+            <div className="absolute top-8 left-8 w-8 h-8 border-t border-l border-white/15 z-30 pointer-events-none" />
+
+            {/* Pagination CSS */}
+            <style>{`
+                .swiper-pagination {
+                    bottom: 40px !important;
+                    left: auto !important;
+                    right: 80px !important;
+                    width: auto !important;
+                    display: flex;
+                    gap: 15px;
+                }
+                .swiper-pagination-bullet {
+                    width: 40px !important;
+                    height: 2px !important;
+                    border-radius: 0 !important;
+                    background: rgba(255,255,255,0.2) !important;
+                    opacity: 1 !important;
+                    margin: 0 !important;
+                    transition: all 0.5s ease;
+                }
+                .swiper-pagination-bullet-active {
+                    background: #ffffff !important;
+                    width: 80px !important;
+                }
+            `}</style>
         </section>
     );
 };

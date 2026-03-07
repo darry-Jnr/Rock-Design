@@ -4,23 +4,41 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const testimonials = [
   {
-    quote: "Rock Dezign completely transformed our office space. Their team brought creativity and precision to every detail.",
-    name: "Amaka Johnson",
-    role: "Principal Architect",
-    company: "Lagos Design Collective",
+    quote: "This was our third project completed with Peter — he is always able to nail down every requested detail and is wonderful at quick communication.",
+    name: "Halatch",
   },
   {
-    quote: "They delivered our dream home exactly as envisioned. Professional, punctual, and highly skilled team.",
-    name: "Chuka Eze",
-    role: "Director",
-    company: "Eze Properties",
+    quote: "Great working with you. You delivered on time and with quality of work. I do recommend you!! Thank you",
+    name: "Ksam",
   },
   {
-    quote: "Amazing attention to detail and superb execution. They understood our vision perfectly and brought it to life!",
-    name: "Sarah Opoku",
-    role: "Founding Partner",
-    company: "Opoku Designs",
-  }
+    quote: "Peter was good to work with.",
+    name: "Bigtom",
+  },
+  {
+    quote: "It was great working with Peter! Highly recommend!",
+    name: "Ksevvv",
+  },
+  {
+    quote: "Peter rescued this project from another Fiverr freelancer that had defrauded and then ghosted me. His initial understanding of what I needed and enthusiastic cooperation during the subsequent revision cycles was extremely professional. I look forward to working with him again in the future.",
+    name: "Emmrodge",
+  },
+  {
+    quote: "Our initial conversation was short and I neglected to give him much more than a chicken scratch drawing. He nailed the design immediately, and went above and beyond by researching building codes in our area. The designs to our new house are beautiful and highly functional. My wife is an engineer herself and is very impressed with the specifications and detail Peter gave all the way through.",
+    name: "Dariwuz",
+  },
+  {
+    quote: "Peter has been my primary contact to develop plans and I'm so glad we are working together for the third time. Great professional. Highly recommend.",
+    name: "Fabricio_sa",
+  },
+  {
+    quote: "Peter did a good job understanding what I needed and following through. His quick turnaround time was truly professional. I would use Peter and his team again for all drawing needs.",
+    name: "Cmelending",
+  },
+  {
+    quote: "Peter listened to my needs and was able to create an accurate floorplan from drawings and photos I sent him. The process was quick and easy. I will use again.",
+    name: "Cmelending",
+  },
 ];
 
 const variants = {
@@ -117,9 +135,17 @@ const Carousel = () => {
                 }}
                 className="w-full"
               >
-                <blockquote className="text-3xl md:text-5xl font-light text-[#003152] leading-[1.15] tracking-tight italic font-serif mb-12">
-                  {testimonials[index].quote}
-                </blockquote>
+                <blockquote
+  className={`font-light text-[#003152] leading-[1.15] tracking-tight italic font-serif mb-12 transition-all duration-300
+    ${testimonials[index].quote.length > 200
+      ? "text-xl md:text-2xl"
+      : testimonials[index].quote.length > 100
+      ? "text-2xl md:text-3xl"
+      : "text-3xl md:text-5xl"
+    }`}
+>
+  {testimonials[index].quote}
+</blockquote>
                 
                 <div className="pt-10 border-t border-gray-100 flex items-center gap-6">
                   <div className="w-12 h-12 bg-[#003152] rounded-full flex items-center justify-center text-white font-serif italic text-xl shadow-lg">
@@ -127,7 +153,7 @@ const Carousel = () => {
                   </div>
                   
                   <div>
-                    <h4 className="text-xl font-light text-[#003152] tracking-tight">
+                    <h4 className="text-xl pt-0 md:pt-2 font-light text-[#003152] tracking-tight">
                       {testimonials[index].name}
                     </h4>
                     <p className="text-[10px] uppercase tracking-[0.3em] text-gray-400 mt-1 font-barlow font-bold">
