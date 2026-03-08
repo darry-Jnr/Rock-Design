@@ -10,7 +10,10 @@ import 'swiper/css/pagination';
 const slides = [
     {
         type: 'video',
-        src: "https://res.cloudinary.com/dwlgcj8ht/video/upload/v1771216116/Montessori_K_4_hnomlm.mp4",
+        // Optimised with Cloudinary auto-format and auto-quality
+        src: "https://res.cloudinary.com/dwlgcj8ht/video/upload/q_auto,f_auto/v1771216116/Montessori_K_4_hnomlm.mp4",
+        // Poster image is vital for fixing CLS (layout shift)
+        poster: "https://res.cloudinary.com/dwlgcj8ht/video/upload/so_0/v1771216116/Montessori_K_4_hnomlm.jpg",
         title: 'Leadership. Innovation.',
         subtitle: 'Designing for a sustainable future.',
     },
@@ -35,14 +38,16 @@ const Hero = () => {
                     <SwiperSlide key={index} className="relative overflow-hidden">
 
                         {/* Media Layer */}
-                        <div className="absolute inset-0 z-0">
+                        <div className="absolute inset-0 z-0 bg-black">
                             {slide.type === 'video' ? (
                                 <video
                                     src={slide.src}
+                                    poster={slide.poster}
                                     autoPlay
                                     muted
                                     loop
                                     playsInline
+                                    preload="metadata"
                                     className="w-full h-full object-cover scale-105"
                                 />
                             ) : (
@@ -58,7 +63,7 @@ const Hero = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                         </div>
 
-                        {/* Text Layer */}
+                        {/* Text Layer - Font Styles Preserved */}
                         <div className="relative z-20 h-full w-full flex items-end pb-24 px-6 md:px-16">
                             <div className="max-w-4xl">
                                 <motion.div

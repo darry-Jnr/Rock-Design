@@ -6,7 +6,7 @@ const projectData = [
       country: "Idaho",
       category: "Luxury Residential",
       // Main image for the grid and hero
-      image:  "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240315/panthers-1_alxlp7.webp",
+      image:  "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240316/panthers-2_sy4rvd.webp",
       
       // The "Story" or write-up the client gave you so here it has title which is this "Proposed Residential Development for Jeremy Mingura at Idaho "
       description: "This project is a thoughtfully designed large-scale residential development set on an expansive lot, delivering approximately 8,100+ sq ft of refined living space across two levels. The design prioritizes openness, comfort, and functionality, with generous ceiling heights and seamless transitions between indoor and outdoor areas.Key features include multiple entertainment and leisure spaces such as a home theatre, billiards room, gym, bar, wine storage, and a private master suite. The development is complemented by extensive covered patios, an outdoor kitchen, swimming pool, and sunken firepit, as well as a dedicated RV garage with an attached guest suite. The result is a modern luxury residence optimized for both everyday living and hosting.",
