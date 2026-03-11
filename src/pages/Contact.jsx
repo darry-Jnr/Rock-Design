@@ -148,8 +148,7 @@ const Contact = () => {
           <div>
             <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-gray-400 mb-6 border-b pb-4">Headquarters</h4>
             <p className="text-sm text-gray-500 leading-relaxed font-light italic">
-                No. 11, Muri Busari Close, <br />
-                off Adeniyi Jones, Ikeja, <br />
+                Ikeja, <br />
                 Lagos, Nigeria.
             </p>
           </div>

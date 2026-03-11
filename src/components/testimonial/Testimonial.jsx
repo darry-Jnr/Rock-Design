@@ -4,41 +4,59 @@ import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
 const testimonials = [
   {
+    quote: "A professional and responsible place. Excellent for trusting a project and making it come true.",
+    name: "JGH Construction",
+    role: "Project Lead",
+    company: "South Carolina"
+  },
+  {
+    quote: "Thank you Peter for your responsiveness and grace when it came to me changing my mind!",
+    name: "ND_Red",
+    role: "Client",
+    company: "Queensland"
+  },
+  {
     quote: "This was our third project completed with Peter — he is always able to nail down every requested detail and is wonderful at quick communication.",
     name: "Halatch",
+    role: "Repeat Client",
+    company: "Tennessee"
   },
   {
-    quote: "Great working with you. You delivered on time and with quality of work. I do recommend you!! Thank you",
-    name: "Ksam",
-  },
-  {
-    quote: "Peter was good to work with.",
-    name: "Bigtom",
-  },
-  {
-    quote: "It was great working with Peter! Highly recommend!",
-    name: "Ksevvv",
-  },
-  {
-    quote: "Peter rescued this project from another Fiverr freelancer that had defrauded and then ghosted me. His initial understanding of what I needed and enthusiastic cooperation during the subsequent revision cycles was extremely professional. I look forward to working with him again in the future.",
-    name: "Emmrodge",
-  },
-  {
-    quote: "Our initial conversation was short and I neglected to give him much more than a chicken scratch drawing. He nailed the design immediately, and went above and beyond by researching building codes in our area. The designs to our new house are beautiful and highly functional. My wife is an engineer herself and is very impressed with the specifications and detail Peter gave all the way through.",
+    quote: "I have worked with Peter twice now on 2 very different buildings and each time he recognized my peculiar design ideas and needs. He was quick to respond politely with changes and helped me visually understand the drawings where I lacked technical knowledge.",
     name: "Dariwuz",
+    role: "Property Owner",
+    company: "Mississippi"
   },
   {
-    quote: "Peter has been my primary contact to develop plans and I'm so glad we are working together for the third time. Great professional. Highly recommend.",
-    name: "Fabricio_sa",
+    quote: "Peter is always open to direction and helped us revise a complex development of six multi-story duplex units. I appreciate the fast turn around times and patience when we needed extra review time. I highly recommend Peter and his team.",
+    name: "Norm Johnson",
+    role: "Developer",
+    company: "Washington"
   },
   {
-    quote: "Peter did a good job understanding what I needed and following through. His quick turnaround time was truly professional. I would use Peter and his team again for all drawing needs.",
-    name: "Cmelending",
+    quote: "Very impressive how this process was quick and smooth, Peter did exactly what we expected and on top of that very great communication. Now we’re ready to put the house up.",
+    name: "Fabrizosa",
+    role: "Homeowner",
+    company: "South Carolina"
   },
   {
-    quote: "Peter listened to my needs and was able to create an accurate floorplan from drawings and photos I sent him. The process was quick and easy. I will use again.",
-    name: "Cmelending",
+    quote: "Great work, especially on revisions.",
+    name: "Jeremy Mingura",
+    role: "Principal",
+    company: "Idaho"
   },
+  {
+    quote: "Very complex house from rough design to detailed MEP. Took a few revisions but quickly fixed. Extremely happy with the end result and was well worth the cost.",
+    name: "Seriedl",
+    role: "Client",
+    company: "Georgia"
+  },
+  {
+    quote: "I’m so impressed with the house plans! Rock Dezign did an incredible job bringing my vision to life with creativity, precision, and attention to detail. Professional and truly cared about making sure everything was just right.",
+    name: "Tlangford",
+    role: "Visionary",
+    company: "Washington"
+  }
 ];
 
 const variants = {
@@ -74,7 +92,7 @@ const Carousel = () => {
 
     const timer = setInterval(() => {
       paginate(1);
-    }, 5000); // 5 seconds is the industry standard for readability
+    }, 6000); // Increased slightly for longer testimonials
 
     return () => clearInterval(timer);
   }, [paginate, isPaused]);
@@ -118,7 +136,7 @@ const Carousel = () => {
           {/* 2. Content Column */}
           <div 
             className="md:col-span-8 min-h-[450px] flex flex-col justify-center relative cursor-default"
-            onMouseEnter={() => setIsPaused(false)}
+            onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
             <AnimatePresence initial={false} custom={direction} mode="wait">
@@ -136,16 +154,16 @@ const Carousel = () => {
                 className="w-full"
               >
                 <blockquote
-  className={`font-light text-[#003152] leading-[1.15] tracking-tight italic font-serif mb-12 transition-all duration-300
-    ${testimonials[index].quote.length > 200
-      ? "text-xl md:text-2xl"
-      : testimonials[index].quote.length > 100
-      ? "text-2xl md:text-3xl"
-      : "text-3xl md:text-5xl"
-    }`}
->
-  {testimonials[index].quote}
-</blockquote>
+                  className={`font-light text-[#003152] leading-[1.15] tracking-tight italic font-serif mb-12 transition-all duration-300
+                    ${testimonials[index].quote.length > 250
+                      ? "text-xl md:text-2xl"
+                      : testimonials[index].quote.length > 150
+                      ? "text-2xl md:text-3xl"
+                      : "text-3xl md:text-5xl"
+                    }`}
+                >
+                  {testimonials[index].quote}
+                </blockquote>
                 
                 <div className="pt-10 border-t border-gray-100 flex items-center gap-6">
                   <div className="w-12 h-12 bg-[#003152] rounded-full flex items-center justify-center text-white font-serif italic text-xl shadow-lg">

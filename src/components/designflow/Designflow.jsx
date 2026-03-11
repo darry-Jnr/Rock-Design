@@ -1,299 +1,140 @@
 import { useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 
-// ─── DATA ─────────────────────────────────────────────────────────────────────
-
 const stepData = [
-  {
-    id: '01',
-    title: 'Consultation',
-    desc: 'We start by listening. Every great space begins with a deep understanding of who you are, how you live, and what you truly need from your environment.',
-    img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772845705/linkedin-sales-solutions-Be5aVKFv9ho-unsplash_prwqde.jpg',
-  },
-  {
-    id: '02',
-    title: 'Concept',
-    desc: 'Your ideas take shape. We translate everything we have heard into spatial concepts — floor plans, mood boards and early sketches that define the direction.',
-    img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772845701/scott-graham-5fNmWej4tAA-unsplash_ypj9mn.jpg',
-  },
-  {
-    id: '03',
-    title: 'Development',
-    desc: 'The design matures. We refine every detail — structure, materials, light and flow — until the proposal is technically sound and visually compelling.',
-    img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240330/vincent_x5tzag.png',
-  },
-  {
-    id: '04',
-    title: 'Construction',
-    desc: 'We bring it to life. Our team oversees every stage of the build — coordinating contractors, maintaining quality standards and keeping the project on schedule.',
-    img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772845701/joe-holland-80zZ1s24Nag-unsplash_q4dbq9.jpg',
-  },
-  {
-    id: '05',
-    title: 'The Reveal',
-    desc: 'Your vision, realised. We hand over a finished space that reflects everything you asked for — built to last, designed to inspire, and made entirely for you.',
-    img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240281/final_h3whnw.webp',
-  },
+  { id: '01', title: 'Consultation', img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772845705/linkedin-sales-solutions-Be5aVKFv9ho-unsplash_prwqde.jpg', desc: 'We start by listening. Every great space begins with a deep understanding of who you are.' },
+  { id: '02', title: 'Concept', img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772845701/scott-graham-5fNmWej4tAA-unsplash_ypj9mn.jpg', desc: 'Your ideas take shape. We translate everything we have heard into spatial concepts.' },
+  { id: '03', title: 'Development', img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240330/vincent_x5tzag.png', desc: 'The design matures. We refine every detail — structure, materials, light and flow.' },
+  { id: '04', title: 'Construction', img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772845701/joe-holland-80zZ1s24Nag-unsplash_q4dbq9.jpg', desc: 'We bring it to life. Our team oversees every stage of the build coordinating contractors.' },
+  { id: '05', title: 'The Reveal', img: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1770240281/final_h3whnw.webp', desc: 'Your vision, realised. We hand over a finished space that reflects everything you asked for.' },
 ];
 
-// ─── STEP CARD ────────────────────────────────────────────────────────────────
-
-const StepCard = ({ step, index, isTop }) => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-40px' });
+const StepCard = ({ step, index, isTop, parentInView }) => {
   const [hovered, setHovered] = useState(false);
 
-  const textBlock = (
-    <div className="text-center max-w-[200px]">
-      <span className="text-[11px] font-bold tracking-[0.4em] font-barlow block mb-2 text-[#003152]/30">
-        {step.id}
-      </span>
-      <h3 className="text-lg md:text-xl font-light tracking-tight font-barlow text-[#003152] uppercase mb-3 leading-tight">
-        {step.title}
-      </h3>
-      <motion.p
-        animate={{ opacity: hovered ? 1 : 0.6 }}
-        transition={{ duration: 0.3 }}
-        className="text-sm text-gray-500 font-barlow font-light leading-relaxed"
-      >
-        {step.desc}
-      </motion.p>
-    </div>
-  );
+  // Calculate the "Explosion" travel distance
+  // Circles move from the center (index 2) outwards
+  const xOffset = (index - 2) * 50; 
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: isTop ? -50 : 50 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: index * 0.12 }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="flex flex-col items-center gap-6 cursor-default"
+      /* EXPLOSION LOGIC: Start at center (x: -xOffset), scale 0, then move to 0 */
+      initial={{ opacity: 0, scale: 0, x: -xOffset, y: 0 }}
+      animate={parentInView ? { 
+        opacity: 1, 
+        scale: hovered ? 1.05 : 1, 
+        x: 0, 
+        y: 0 
+      } : {}}
+      transition={{ 
+        type: 'spring', 
+        stiffness: 40, 
+        damping: 12, 
+        delay: index * 0.1 
+      }}
+      className="flex flex-col items-center gap-6 relative z-10"
     >
-      {/* Text above for bottom-row cards */}
-      {!isTop && textBlock}
-
-      {/* Circular image */}
-      <motion.div
-        animate={{
-          scale: hovered ? 1.07 : 1,
-          boxShadow: hovered
-            ? '0 0 0 3px #003152, 0 20px 50px rgba(0,49,82,0.2)'
-            : '0 0 0 1.5px rgba(0,49,82,0.12), 0 6px 24px rgba(0,0,0,0.07)',
-        }}
-        transition={{ duration: 0.45, ease: 'easeOut' }}
-        className="relative rounded-full overflow-hidden flex-shrink-0"
-        style={{ width: 140, height: 140 }}
-      >
-        <img
-          src={step.img}
-          alt={step.title}
-          className="w-full h-full object-cover transition-all duration-700"
-          style={{ filter: hovered ? 'grayscale(0%) brightness(1.05)' : 'grayscale(50%)' }}
-        />
-
-        {/* Dark tint on idle */}
+      {!isTop && <TextBlock step={step} hovered={hovered} />}
+      
+      <div className="relative group">
         <motion.div
-          animate={{ opacity: hovered ? 0 : 0.2 }}
-          transition={{ duration: 0.4 }}
-          className="absolute inset-0 bg-[#003152] rounded-full"
-        />
-
-        {/* Step number overlay on hover */}
-        <motion.div
-          animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.7 }}
-          transition={{ duration: 0.3 }}
-          className="absolute inset-0 flex items-center justify-center rounded-full bg-[#003152]/40"
+          className="relative rounded-full overflow-hidden border border-[#003152]/10"
+          style={{ width: 150, height: 150 }}
         >
-          <span className="text-white text-3xl font-light font-barlow tracking-tighter">
-            {step.id}
-          </span>
-        </motion.div>
-
-        {/* Ripple ring */}
-        {hovered && (
-          <motion.div
-            className="absolute inset-0 rounded-full border-2 border-[#003152]"
-            initial={{ scale: 1, opacity: 0.6 }}
-            animate={{ scale: 1.35, opacity: 0 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
+          <img
+            src={step.img}
+            alt={step.title}
+            className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 transition-all duration-700"
           />
-        )}
-      </motion.div>
+          <div className="absolute inset-0 bg-[#003152]/10 group-hover:bg-transparent transition-colors" />
+        </motion.div>
+        
+        {/* Architectural Annotation */}
+        <div className="absolute -top-2 -right-2 bg-white border border-[#003152]/20 w-8 h-8 rounded-full flex items-center justify-center shadow-sm">
+          <span className="text-[10px] font-bold text-[#003152]">{step.id}</span>
+        </div>
+      </div>
 
-      {/* Text below for top-row cards */}
-      {isTop && textBlock}
+      {isTop && <TextBlock step={step} hovered={hovered} />}
     </motion.div>
   );
 };
 
-// ─── CURVED SVG CONNECTOR ─────────────────────────────────────────────────────
+const TextBlock = ({ step, hovered }) => (
+  <div className="text-center max-w-[180px]">
+    <h3 className="text-sm font-bold tracking-widest text-[#003152] uppercase mb-2 font-barlow">{step.title}</h3>
+    <p className="text-[11px] text-gray-400 font-light leading-relaxed font-barlow">{step.desc}</p>
+  </div>
+);
 
-const CurvedConnector = ({ index, inView }) => {
+const ArchitecturalLine = ({ index, parentInView }) => {
   const isDown = index % 2 === 0;
-  const d = isDown
-    ? 'M 0 50 C 25 95, 75 5, 100 50'
-    : 'M 0 50 C 25 5, 75 95, 100 50';
+  const d = isDown ? "M0,50 Q25,80 50,50 T100,50" : "M0,50 Q25,20 50,50 T100,50";
 
   return (
-    <div className="flex-1 h-28 relative" style={{ minWidth: 40 }}>
-      <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
-
-        {/* Ghost track */}
-        <path d={d} fill="none" stroke="#003152" strokeWidth="0.6" opacity="0.07" />
-
-        {/* Animated dashed path */}
+    <div className="flex-1 h-32 relative -mx-8 z-0">
+      <svg viewBox="0 0 100 100" className="w-full h-full overflow-visible">
         <motion.path
           d={d}
           fill="none"
           stroke="#003152"
-          strokeWidth="1"
-          strokeDasharray="5 4"
-          opacity="0.2"
-          initial={{ pathLength: 0 }}
-          animate={inView ? { pathLength: 1 } : {}}
-          transition={{ duration: 1.4, delay: index * 0.25 + 0.4, ease: 'easeInOut' }}
+          strokeWidth="0.5"
+          /* Blueprint Line Logic */
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={parentInView ? { pathLength: 1, opacity: 0.15 } : {}}
+          transition={{ duration: 1.5, delay: index * 0.2 }}
         />
-
-        {/* Travelling dot */}
-        <motion.circle
-          r="3.5"
-          fill="#003152"
-          opacity="0.7"
-          initial={{ offsetDistance: '0%', opacity: 0 }}
-          animate={inView ? { offsetDistance: '100%', opacity: [0, 1, 1, 0] } : {}}
-          transition={{ duration: 1.8, delay: index * 0.25 + 0.7, ease: 'easeInOut' }}
-          style={{ offsetPath: `path("${d}")` }}
+        {/* Technical "End points" for architectural vibe */}
+        <motion.circle 
+          cx="0" cy="50" r="1.5" fill="#003152" opacity="0.2"
+          initial={{ scale: 0 }} animate={parentInView ? { scale: 1 } : {}} 
+        />
+        <motion.circle 
+          cx="100" cy="50" r="1.5" fill="#003152" opacity="0.2"
+          initial={{ scale: 0 }} animate={parentInView ? { scale: 1 } : {}} 
         />
       </svg>
     </div>
   );
 };
 
-// ─── MAIN COMPONENT ───────────────────────────────────────────────────────────
-
 const DesignFlow = () => {
-  const headerRef = useRef(null);
-  const headerInView = useInView(headerRef, { once: true });
-  const flowRef = useRef(null);
-  const flowInView = useInView(flowRef, { once: true, margin: '-60px' });
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="py-40 bg-[#fcfcfc] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-16">
-
-        {/* Header */}
-        <div ref={headerRef} className="mb-28">
-          <motion.span
-            initial={{ opacity: 0, x: -20 }}
-            animate={headerInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            className="text-[10px] font-bold tracking-[0.8em] uppercase block mb-6 font-barlow text-gray-300"
+    <section ref={containerRef} className="py-40 bg-white overflow-hidden">
+      <div className="max-w-[1600px] mx-auto px-10">
+        
+        <div className="mb-32 text-center">
+          <motion.span 
+            initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}}
+            className="text-[10px] tracking-[0.8em] uppercase text-gray-300 font-bold block mb-4"
           >
-            Methodology
+            Our Process
           </motion.span>
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            animate={headerInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.9, delay: 0.1 }}
-            className="text-6xl md:text-8xl font-light text-[#003152] tracking-tighter leading-[0.85] font-barlow"
-          >
-            The Design <br />
-            <span className="italic font-serif text-gray-300">Sequence.</span>
-          </motion.h2>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={headerInView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-8 text-gray-400 font-barlow font-light text-base max-w-lg leading-relaxed"
-          >
-            From the first conversation to the final handover, every step in our process is designed to ensure your project is delivered with precision, care, and excellence.
-          </motion.p>
+          <h2 className="text-7xl font-light text-[#003152] tracking-tighter font-barlow">
+            The Design <span className="italic font-serif text-gray-300">Sequence</span>
+          </h2>
         </div>
 
-        {/* ── DESKTOP: Zigzag wave ── */}
-        <div
-          ref={flowRef}
-          className="hidden md:flex items-center justify-between"
-          style={{ minHeight: 500 }}
-        >
-          {stepData.map((step, index) => {
-            const isTop = index % 2 === 0;
-            return (
-              <div key={step.id} className="flex items-center flex-1">
-                <div
-                  className="flex-shrink-0 flex items-center justify-center"
-                  style={{
-                    alignSelf: isTop ? 'flex-start' : 'flex-end',
-                    width: 200,
-                  }}
-                >
-                  <StepCard step={step} index={index} isTop={isTop} />
-                </div>
-
-                {index < stepData.length - 1 && (
-                  <CurvedConnector index={index} inView={flowInView} />
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* ── MOBILE: Vertical timeline ── */}
-        <div className="md:hidden flex flex-col">
+        <div className="flex items-center justify-between">
           {stepData.map((step, index) => (
-            <div key={step.id} className="flex gap-6 items-start">
-
-              {/* Left: image + line */}
-              <div className="flex flex-col items-center flex-shrink-0">
-                <div
-                  className="rounded-full overflow-hidden border border-[#003152]/15 flex-shrink-0"
-                  style={{ width: 56, height: 56 }}
-                >
-                  <img
-                    src={step.img}
-                    alt={step.title}
-                    className="w-full h-full object-cover"
-                    style={{ filter: 'grayscale(40%)' }}
-                  />
-                </div>
-                {index < stepData.length - 1 && (
-                  <motion.div
-                    initial={{ scaleY: 0 }}
-                    whileInView={{ scaleY: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    style={{ originY: 0 }}
-                    className="w-[1px] min-h-[70px] flex-1 bg-gradient-to-b from-[#003152]/20 to-transparent mt-2"
-                  />
-                )}
-              </div>
-
-              {/* Right: text */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: index * 0.1 }}
-                className="pb-12 pt-1"
-              >
-                <span className="text-[11px] font-bold tracking-[0.4em] font-barlow text-[#003152]/30 block mb-1">
-                  {step.id}
-                </span>
-                <h3 className="text-xl font-light text-[#003152] tracking-tight font-barlow uppercase mb-3">
-                  {step.title}
-                </h3>
-                <p className="text-sm text-gray-500 font-barlow font-light leading-relaxed max-w-xs">
-                  {step.desc}
-                </p>
-              </motion.div>
-
+            <div key={step.id} className="flex items-center flex-1">
+              <StepCard 
+                step={step} 
+                index={index} 
+                isTop={index % 2 === 0} 
+                parentInView={isInView} 
+              />
+              {index < stepData.length - 1 && (
+                <ArchitecturalLine index={index} parentInView={isInView} />
+              )}
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

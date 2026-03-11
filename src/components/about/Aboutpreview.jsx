@@ -25,7 +25,7 @@ const AboutPreview = () => {
                         </div>
                     </motion.div>
 
-                    {/* 2. TEXT */}
+                    {/* 2. TEXT & CTA */}
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -63,13 +63,23 @@ const AboutPreview = () => {
                             </p>
                         </div>
 
-                        <div className="mt-12">
+                        {/* PRIMARY & SECONDARY CTA BLOCK */}
+                        <div className="mt-12 flex flex-col sm:flex-row items-start sm:items-center gap-10">
+                            {/* Primary: Learn More */}
                             <Link
                                 to="/about"
                                 className="group inline-flex items-center gap-6 text-[10px] font-bold tracking-[0.4em] text-[#003152] uppercase transition-all font-barlow"
                             >
                                 <span>Discover our Story</span>
                                 <div className="w-12 h-[1px] bg-[#003152] group-hover:w-20 transition-all duration-500" />
+                            </Link>
+
+                            {/* Secondary: Direct Action */}
+                            <Link
+                                to="/contact"
+                                className="px-8 py-4 bg-[#003152] text-white text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-gray-800 transition-colors duration-300 font-barlow"
+                            >
+                                Start a Project
                             </Link>
                         </div>
                     </motion.div>

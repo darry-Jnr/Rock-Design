@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, useInView, useSpring, useMotionValue } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import DesignFlow from '../components/designflow/Designflow';
@@ -59,7 +59,6 @@ const ServiceRow = ({ service, index }) => {
         onMouseLeave={() => setHovered(false)}
         className="relative border-b border-[#003152]/10 overflow-hidden cursor-pointer"
       >
-        {/* Dark fill sweep */}
         <motion.div
           className="absolute inset-0 bg-[#003152] z-0 origin-bottom"
           initial={{ scaleY: 0 }}
@@ -67,7 +66,6 @@ const ServiceRow = ({ service, index }) => {
           transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
         />
 
-        {/* Gold top accent line */}
         <motion.div
           className="absolute top-0 left-0 h-[2px] bg-[#C8A96E] origin-left z-20"
           style={{ width: '100%' }}
@@ -77,8 +75,6 @@ const ServiceRow = ({ service, index }) => {
         />
 
         <div className="relative z-10 grid grid-cols-12 items-center px-6 md:px-16 py-10 md:py-14 gap-4">
-
-          {/* Code */}
           <div className="col-span-1 hidden md:block">
             <motion.span
               animate={{ color: hovered ? 'rgba(255,255,255,0.25)' : '#D1D5DB' }}
@@ -89,7 +85,6 @@ const ServiceRow = ({ service, index }) => {
             </motion.span>
           </div>
 
-          {/* Title */}
           <div className="col-span-12 md:col-span-4">
             <motion.h3
               animate={{ color: hovered ? '#FFFFFF' : '#003152', x: hovered ? 8 : 0 }}
@@ -100,7 +95,6 @@ const ServiceRow = ({ service, index }) => {
             </motion.h3>
           </div>
 
-          {/* Description */}
           <div className="col-span-12 md:col-span-4">
             <motion.p
               animate={{ color: hovered ? 'rgba(255,255,255,0.55)' : '#9CA3AF' }}
@@ -111,7 +105,6 @@ const ServiceRow = ({ service, index }) => {
             </motion.p>
           </div>
 
-          {/* Tag + Stat */}
           <div className="col-span-12 md:col-span-3 flex md:flex-col items-start md:items-end gap-3">
             <motion.span
               animate={{
@@ -134,7 +127,6 @@ const ServiceRow = ({ service, index }) => {
             </motion.span>
           </div>
 
-          {/* Arrow */}
           <motion.div
             className="absolute right-6 md:right-14 top-1/2 -translate-y-1/2"
             initial={{ opacity: 0, x: -10 }}
@@ -145,7 +137,6 @@ const ServiceRow = ({ service, index }) => {
               <path d="M0 8H30M30 8L23 1M30 8L23 15" stroke="white" strokeWidth="1.2" strokeLinecap="round" />
             </svg>
           </motion.div>
-
         </div>
       </motion.div>
     </Link>
@@ -155,6 +146,23 @@ const ServiceRow = ({ service, index }) => {
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
 const Services = () => {
+  // Parallax Motion Values
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 150 };
+  const dx = useSpring(mouseX, springConfig);
+  const dy = useSpring(mouseY, springConfig);
+
+  const handleMouseMove = (e) => {
+    const { clientX, clientY, currentTarget } = e;
+    const { width, height, left, top } = currentTarget.getBoundingClientRect();
+    const x = (clientX - left) / width - 0.5;
+    const y = (clientY - top) / height - 0.5;
+    mouseX.set(x * 50); // Intensity of movement
+    mouseY.set(y * 50);
+  };
+
   return (
     <div className="bg-white text-[#003152]">
       <Helmet>
@@ -163,8 +171,8 @@ const Services = () => {
 
       {/* 1. HERO */}
       <section className="relative h-screen flex flex-col md:flex-row overflow-hidden border-b border-gray-100">
-
-        {/* Left */}
+        
+        {/* Left Side */}
         <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-6 md:px-20 bg-white">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -185,9 +193,12 @@ const Services = () => {
           </motion.div>
         </div>
 
-        {/* Right: Geometric animated block */}
-        <div className="hidden md:flex w-1/2 h-full bg-[#003152] relative overflow-hidden items-center justify-center">
-
+        {/* Right Side: Interactive Geometric Block */}
+        <div 
+            onMouseMove={handleMouseMove}
+            className="hidden md:flex w-1/2 h-full bg-[#003152] relative overflow-hidden items-center justify-center cursor-crosshair"
+        >
+          {/* Subtle Dot Grid */}
           <svg className="absolute inset-0 w-full h-full opacity-10">
             <defs>
               <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
@@ -197,40 +208,60 @@ const Services = () => {
             <rect width="100%" height="100%" fill="url(#dots)" />
           </svg>
 
+          {/* Parallax Moving Axis Lines */}
+          <motion.div style={{ x: dx }} className="absolute left-1/4 h-full w-[1px] bg-white/10" />
+          <motion.div style={{ y: dy }} className="absolute top-1/3 w-full h-[1px] bg-white/10" />
+
+          {/* Main Rotating Geometrics */}
           <motion.div
+            style={{ x: dx, y: dy }}
             className="absolute w-64 h-64 border border-white/10"
             animate={{ rotate: 360 }}
             transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
           />
           <motion.div
-            className="absolute w-[420px] h-[420px] border border-white/5"
+            style={{ x: useSpring(mouseX, { stiffness: 50 }), y: useSpring(mouseY, { stiffness: 50 }) }}
+            className="absolute w-[420px] h-[420px] border border-white/5 border-dashed rounded-full"
             animate={{ rotate: -360 }}
             transition={{ duration: 70, repeat: Infinity, ease: 'linear' }}
           />
 
+          {/* Center Branding & Data */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.6, duration: 1.2 }}
             className="relative z-10 text-center"
           >
-            <span className="text-white/[0.07] text-[200px] font-light font-barlow leading-none block select-none">
+            <span className="text-white/[0.07] text-[200px] font-light font-barlow leading-none block select-none tracking-tighter">
               RD
             </span>
-            <div className="w-12 h-[1px] bg-white/20 mx-auto" />
+            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-4 whitespace-nowrap">
+                <div className="w-8 h-[1px] bg-white/20" />
+                <span className="text-[8px] text-white/30 font-bold tracking-[0.5em] uppercase font-barlow animate-pulse">
+                    LGS // 6.5244° N
+                </span>
+                <div className="w-8 h-[1px] bg-white/20" />
+            </div>
           </motion.div>
 
-          <div className="absolute top-8 left-8 w-8 h-8 border-t border-l border-white/20" />
+          {/* Drafting Markers */}
+          <div className="absolute top-8 left-8 flex flex-col gap-2">
+            <div className="w-8 h-8 border-t border-l border-white/20" />
+            <span className="text-[7px] text-white/20 font-bold tracking-widest font-barlow">COORD: XYZ_88</span>
+          </div>
           <div className="absolute top-8 right-8 w-8 h-8 border-t border-r border-white/20" />
           <div className="absolute bottom-8 left-8 w-8 h-8 border-b border-l border-white/20" />
-          <div className="absolute bottom-8 right-8 w-8 h-8 border-b border-r border-white/20" />
+          <div className="absolute bottom-8 right-8 flex flex-col items-end gap-2">
+            <span className="text-[7px] text-white/20 font-bold tracking-widest font-barlow">SCALE: 1:100</span>
+            <div className="w-8 h-8 border-b border-r border-white/20" />
+          </div>
         </div>
       </section>
 
       {/* 2. SERVICES LIST */}
       <section className="bg-white border-t border-[#003152]/10">
         <div className="max-w-7xl mx-auto">
-
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -248,14 +279,13 @@ const Services = () => {
           {serviceList.map((service, index) => (
             <ServiceRow key={index} service={service} index={index} />
           ))}
-
         </div>
       </section>
 
-      {/* 3. DESIGN FLOW — imported from its own component */}
+      {/* 3. DESIGN FLOW Component */}
       <DesignFlow />
 
-      {/* 4. CTA */}
+      {/* 4. CTA SECTION */}
       <section className="py-40 bg-[#003152] text-center px-6">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
@@ -275,7 +305,6 @@ const Services = () => {
           </Link>
         </motion.div>
       </section>
-
     </div>
   );
 };

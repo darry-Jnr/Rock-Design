@@ -140,9 +140,8 @@ const Footer = () => {
                                 Location
                             </h4>
                             <p className="text-sm text-gray-500 leading-relaxed font-light">
-                                No. 11, Muri Busari Close, <br />
-                                off Adeniyi Jones, Ikeja, <br />
-                                Lagos, Nigeria.
+                            Ikeja, <br />
+                            Lagos, Nigeria.
                             </p>
                         </div>
                         <button
