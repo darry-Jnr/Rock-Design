@@ -97,7 +97,6 @@ const Navbar = () => {
       }`}>
         <div className="max-w-[1800px] mx-auto flex justify-between items-center">
           
-          {/* Logo Section */}
           <Link to="/" className="flex items-center gap-3 group">
             <img src={logo} className="h-8 w-auto transition-transform duration-500 group-hover:scale-110" alt="Logo" />
             <img
@@ -109,14 +108,11 @@ const Navbar = () => {
             />
           </Link>
 
-          {/* Actions & Contact Info */}
           <div className="flex items-center gap-6 md:gap-10">
-            
-            {/* Direct Contact (Hidden on Mobile/Small Laptops) */}
             <div className="hidden xl:flex items-center gap-8 mr-4">
                <a 
                 href="mailto:info@rockdezign.com" 
-                className={`text-[9px] font-bold tracking-[0.3em] uppercase transition-all duration-300 hover:opacity-50 font-barlow ${
+                className={`text-[9px] font-bold tracking-[0.3em] transition-all duration-300 hover:opacity-50 font-barlow ${
                   isDarkNav ? 'text-[#003152]' : 'text-white'
                 }`}
               >
@@ -149,7 +145,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Backdrop */}
       <AnimatePresence>
         {(menuOpen || searchOpen) && (
           <motion.div
@@ -170,18 +165,20 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-            className="fixed right-0 top-0 h-screen w-full md:w-[50%] lg:w-[40%] z-[200] bg-white text-[#003152] shadow-2xl flex flex-col p-10 md:p-16"
+            className="fixed right-0 top-0 h-screen w-full md:w-[60%] lg:w-[50%] z-[200] bg-white text-[#003152] shadow-2xl flex flex-col p-8 md:p-12 overflow-y-auto"
           >
-            <div className="flex justify-between items-center">
-              <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-gray-300 font-barlow">Navigation</span>
+            {/* Header */}
+            <div className="flex justify-between items-center mb-6">
+              <span className="text-[9px] font-bold tracking-[0.5em] uppercase text-gray-300 font-barlow">Navigation</span>
               <button onClick={() => setMenuOpen(false)} className="group flex items-center gap-3">
-                <span className="text-[10px] font-bold tracking-[0.4em] uppercase font-barlow">Close</span>
-                <HiX className="text-3xl group-hover:rotate-90 transition-transform duration-500" />
+                <span className="text-[9px] font-bold tracking-[0.4em] uppercase font-barlow">Close</span>
+                <HiX className="text-2xl group-hover:rotate-90 transition-transform duration-500" />
               </button>
             </div>
 
-            <div className="flex-grow flex flex-col justify-center">
-              <div className="flex flex-col space-y-2">
+            {/* Links Section - Adjusted sizing for laptop screens */}
+            <div className="flex-grow flex flex-col justify-center py-4">
+              <div className="flex flex-col">
                 {navLinks.map((link, i) => (
                   <motion.div
                     key={i}
@@ -192,7 +189,7 @@ const Navbar = () => {
                     <Link
                       to={link.path}
                       onClick={() => setMenuOpen(false)}
-                      className="text-5xl md:text-6xl font-light tracking-tighter hover:italic hover:translate-x-4 transition-all duration-500 block py-4 border-b border-gray-50 last:border-0"
+                      className="text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter hover:italic hover:translate-x-4 transition-all duration-500 block py-3 border-b border-gray-50 last:border-0"
                     >
                       {link.name}
                     </Link>
@@ -201,20 +198,30 @@ const Navbar = () => {
               </div>
             </div>
 
-            <div className="mt-auto pt-10 grid grid-cols-2 gap-8">
-              <div>
-                <p className="text-[9px] font-bold tracking-widest text-gray-300 uppercase mb-4 font-barlow">Connect</p>
-                <div className="flex flex-col gap-2 text-sm font-medium font-barlow">
-                  <a href="https://www.instagram.com/rockdezign" target="_blank" rel="noreferrer" className="hover:text-[#003152]/50 transition">Instagram</a>
-                  <a href="https://www.linkedin.com/company/rock-dezign" target="_blank" rel="noreferrer" className="hover:text-[#003152]/50 transition">LinkedIn</a>
+            {/* Footer Section - Grid Columns Optimized */}
+            <div className="mt-auto pt-6 border-t border-gray-100">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div>
+                  <p className="text-[8px] font-bold tracking-widest text-gray-300 uppercase mb-3 font-barlow">Connect</p>
+                  <div className="flex flex-col gap-1 text-xs font-medium font-barlow">
+                    <a href="https://www.instagram.com/rockdezign" target="_blank" rel="noreferrer" className="hover:text-[#003152]/50 transition">Instagram</a>
+                    <a href="https://www.linkedin.com/company/rock-dezign" target="_blank" rel="noreferrer" className="hover:text-[#003152]/50 transition">LinkedIn</a>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <p className="text-[9px] font-bold tracking-widest text-gray-300 uppercase mb-4 font-barlow">Studio</p>
-                <div className="flex flex-col gap-1 text-sm font-light text-gray-500 leading-relaxed font-barlow">
-                  <p>Ikeja, <br /> Lagos, Nigeria.</p>
-                  <a href="tel:+2348123456789" className="hover:text-[#003152] transition-colors mt-2">+234 812 345 6789</a>
-                  <a href="mailto:info@rockdezign.com" className="hover:text-[#003152] transition-colors">info@rockdezign.com</a>
+
+                <div>
+                  <p className="text-[8px] font-bold tracking-widest text-gray-300 uppercase mb-3 font-barlow">Studio</p>
+                  <div className="text-xs font-light text-gray-500 leading-relaxed font-barlow">
+                    <p>Ikeja, Lagos, Nigeria.</p>
+                  </div>
+                </div>
+
+                <div className="col-span-2 md:col-span-1">
+                  <p className="text-[8px] font-bold tracking-widest text-gray-300 uppercase mb-3 font-barlow">Inquiries</p>
+                  <div className="flex flex-col gap-1 text-xs font-light font-barlow">
+                    <a href="tel:+2348123456789" className="text-[#003152] hover:opacity-60 transition-colors">+234 812 345 6789</a>
+                    <a href="mailto:info@rockdezign.com" className="text-[#003152] hover:opacity-60 transition-colors">info@rockdezign.com</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -222,7 +229,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* Search Panel */}
+      {/* Search Panel - Same height optimizations applied */}
       <AnimatePresence>
         {searchOpen && (
           <motion.div
@@ -230,28 +237,28 @@ const Navbar = () => {
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-            className="fixed right-0 top-0 h-screen w-full md:w-[50%] lg:w-[40%] z-[200] bg-[#fcfcfc] shadow-2xl flex flex-col p-10 md:p-16 overflow-y-auto"
+            className="fixed right-0 top-0 h-screen w-full md:w-[50%] lg:w-[40%] z-[200] bg-[#fcfcfc] shadow-2xl flex flex-col p-8 md:p-12 overflow-y-auto"
           >
-            <div className="flex justify-between items-center mb-16">
-              <span className="text-[10px] font-bold tracking-[0.5em] uppercase text-gray-300 font-barlow">Search</span>
+            <div className="flex justify-between items-center mb-8">
+              <span className="text-[9px] font-bold tracking-[0.5em] uppercase text-gray-300 font-barlow">Search</span>
               <button onClick={() => setSearchOpen(false)} className="group flex items-center gap-3">
-                <span className="text-[10px] font-bold tracking-[0.4em] uppercase font-barlow text-[#003152]">Close</span>
-                <HiX className="text-3xl text-[#003152] group-hover:rotate-90 transition-transform duration-500" />
+                <span className="text-[9px] font-bold tracking-[0.4em] uppercase font-barlow text-[#003152]">Close</span>
+                <HiX className="text-2xl text-[#003152] group-hover:rotate-90 transition-transform duration-500" />
               </button>
             </div>
 
-            <div className="relative mb-10">
+            <div className="relative mb-8">
               <input
                 ref={inputRef}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Type to search..."
-                className="w-full text-3xl md:text-4xl font-light tracking-tighter border-b-2 border-gray-200 pb-4 bg-transparent outline-none focus:border-[#003152] transition-colors font-barlow text-[#003152] placeholder-gray-200"
+                className="w-full text-2xl md:text-3xl font-light tracking-tighter border-b border-gray-200 pb-2 bg-transparent outline-none focus:border-[#003152] transition-colors font-barlow text-[#003152] placeholder-gray-200"
               />
               {query && (
-                <button onClick={() => setQuery('')} className="absolute right-0 bottom-4 text-gray-300 hover:text-[#003152] transition">
-                  <HiX size={20} />
+                <button onClick={() => setQuery('')} className="absolute right-0 bottom-3 text-gray-300 hover:text-[#003152] transition">
+                  <HiX size={18} />
                 </button>
               )}
             </div>
@@ -261,10 +268,10 @@ const Navbar = () => {
                 <motion.div key="results" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}>
                   {results.length > 0 ? (
                     <>
-                      <p className="text-[10px] font-bold tracking-widest uppercase text-gray-300 mb-6 font-barlow">
-                        {results.length} result{results.length !== 1 ? 's' : ''} for "{query}"
+                      <p className="text-[9px] font-bold tracking-widest uppercase text-gray-300 mb-4 font-barlow">
+                        {results.length} result{results.length !== 1 ? 's' : ''}
                       </p>
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-1">
                         {results.map((item, i) => (
                           <motion.button
                             key={i}
@@ -272,47 +279,33 @@ const Navbar = () => {
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: i * 0.05 }}
                             onClick={() => handleResultClick(item.path)}
-                            className="group flex items-start gap-4 p-4 hover:bg-white rounded-sm transition-all duration-300 text-left w-full border border-transparent hover:border-gray-100"
+                            className="group flex items-start gap-4 p-3 hover:bg-white rounded-sm transition-all duration-300 text-left w-full border border-transparent hover:border-gray-100"
                           >
-                            <span className={`text-[9px] font-bold tracking-widest uppercase px-2 py-1 rounded-sm font-barlow flex-shrink-0 mt-0.5 ${TYPE_COLORS[item.type]}`}>
+                            <span className={`text-[8px] font-bold tracking-widest uppercase px-2 py-0.5 rounded-sm font-barlow flex-shrink-0 mt-1 ${TYPE_COLORS[item.type]}`}>
                               {item.type}
                             </span>
                             <div className="flex-1 min-w-0">
-                              <p className="text-base font-light text-[#003152] font-barlow group-hover:italic transition-all truncate">{item.title}</p>
-                              <p className="text-xs text-gray-400 font-barlow mt-0.5 truncate">{item.desc}</p>
+                              <p className="text-sm font-light text-[#003152] font-barlow group-hover:italic transition-all truncate">{item.title}</p>
+                              <p className="text-[10px] text-gray-400 font-barlow truncate">{item.desc}</p>
                             </div>
-                            <motion.div initial={{ opacity: 0, x: -6 }} animate={{ opacity: 1, x: 0 }} className="flex-shrink-0 opacity-0 group-hover:opacity-100 transition-opacity mt-1">
-                              <svg width="16" height="10" viewBox="0 0 16 10" fill="none">
-                                <path d="M0 5H14M14 5L10 1M14 5L10 9" stroke="#003152" strokeWidth="1" strokeLinecap="round"/>
-                              </svg>
-                            </motion.div>
                           </motion.button>
                         ))}
                       </div>
                     </>
                   ) : (
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-16">
-                      <p className="text-gray-300 text-sm font-barlow font-light mb-2">No results for "{query}"</p>
-                      <p className="text-gray-200 text-xs font-barlow">Try searching for a service or project name</p>
-                    </motion.div>
+                    <div className="text-center py-10">
+                      <p className="text-gray-300 text-xs font-barlow font-light">No results found</p>
+                    </div>
                   )}
                 </motion.div>
               ) : (
                 <motion.div key="default" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                  <p className="text-[10px] font-bold tracking-widest uppercase text-gray-300 mb-8 font-barlow">Quick Links</p>
-                  <div className="flex flex-col gap-1">
+                  <p className="text-[9px] font-bold tracking-widest uppercase text-gray-300 mb-4 font-barlow">Quick Links</p>
+                  <div className="flex flex-col gap-0.5">
                     {searchData.filter(i => i.type === 'Page').map((item, i) => (
-                      <button key={i} onClick={() => handleResultClick(item.path)} className="group flex items-center gap-4 py-4 border-b border-gray-100 last:border-0 hover:translate-x-2 transition-transform text-left w-full">
-                        <div className="w-5 h-[1px] bg-gray-200 group-hover:w-8 group-hover:bg-[#003152] transition-all duration-300" />
-                        <span className="text-xl font-light text-[#003152] font-barlow tracking-tight group-hover:italic transition-all">{item.title}</span>
-                      </button>
-                    ))}
-                  </div>
-                  <p className="text-[10px] font-bold tracking-widest uppercase text-gray-300 mt-12 mb-6 font-barlow">Our Services</p>
-                  <div className="flex flex-wrap gap-2">
-                    {searchData.filter(i => i.type === 'Service').map((item, i) => (
-                      <button key={i} onClick={() => handleResultClick(item.path)} className="text-[11px] font-barlow font-bold tracking-wider uppercase px-3 py-2 border border-[#003152]/10 text-[#003152]/50 hover:border-[#003152] hover:text-[#003152] transition-all duration-300">
-                        {item.title}
+                      <button key={i} onClick={() => handleResultClick(item.path)} className="group flex items-center gap-3 py-3 border-b border-gray-50 last:border-0 hover:translate-x-2 transition-transform text-left w-full">
+                        <div className="w-4 h-[1px] bg-gray-200 group-hover:w-6 group-hover:bg-[#003152] transition-all duration-300" />
+                        <span className="text-lg font-light text-[#003152] font-barlow tracking-tight group-hover:italic transition-all">{item.title}</span>
                       </button>
                     ))}
                   </div>

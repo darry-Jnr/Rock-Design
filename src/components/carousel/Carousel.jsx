@@ -85,17 +85,7 @@ const Hero = () => {
                             </div>
                         </div>
 
-                        {/* Bottom right: We listen, we design, we build — per brief */}
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 1.2, duration: 1 }}
-                            className="absolute bottom-24 right-6 md:right-16 z-20 text-right"
-                        >
-                            <p className="text-white/25 text-[10px] tracking-[0.35em] uppercase font-barlow leading-loose">
-                                We listen<br />We design<br />We build
-                            </p>
-                        </motion.div>
+                       
 
                     </SwiperSlide>
                 ))}

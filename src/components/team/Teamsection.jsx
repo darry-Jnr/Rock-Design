@@ -9,23 +9,24 @@ const team = [
         image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772841533/PETER_ADENIRAN_-_FOUNDER_rlihga.jpg'
     },
     {
-        name: 'Bello Oluwagbemiro',
-        role: 'Creative Director',
-        specialty: 'Sustainable Urban Planning',
-        image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772841535/OLUWAGBEMIRO_BELLO_pdwyrq.png'
-    },
-    {
         name: 'Emmanuel Mathew',
-        role: 'Creative Director',
-        specialty: 'BIM & Technical Documentation',
+        role: 'Co-Founder',
         image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773197966/EMMANUEL_MATHEW_c2nz3x.jpg'
     },
     {
         name: 'Jude Bayode',
-        role: 'Creative Director',
+        role: 'Architectural Designer',
         specialty: 'Interior Architecture & UX',
+        image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773198298/JUDE_BAYODE_topezr.jpg'
+    },
+    {
+        name: 'Bello Oluwagbemiro',
+        role: 'Architectural Designer',
+        specialty: '',
         image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772841535/OLUWAGBEMIRO_BELLO_pdwyrq.png'
     },
+   
+  
 ];
 
 const TeamSection = () => {
@@ -86,12 +87,7 @@ const TeamSection = () => {
                                 <h3 className="text-xl font-light text-[#003152] tracking-tight group-hover:translate-x-2 transition-transform duration-500 font-barlow">
                                     {member.name}
                                 </h3>
-                                
-                                <div className="overflow-hidden">
-                                    <p className="text-[10px] text-gray-400 font-light translate-y-0 group-hover:text-[#003152] transition-colors duration-500 font-barlow leading-relaxed">
-                                        Specializing in {member.specialty}
-                                    </p>
-                                </div>
+                           
                             </div>
                         </motion.div>
                     ))}
