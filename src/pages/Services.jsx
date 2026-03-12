@@ -156,7 +156,7 @@ const Services = () => {
       <section className="relative h-screen flex flex-col md:flex-row overflow-hidden border-b border-gray-100">
         
         {/* Left Side */}
-        <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-6 md:px-20 bg-white z-10">
+        <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-6 md:px-20 bg-white z-10 pt-24 md:pt-0">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -176,21 +176,21 @@ const Services = () => {
           </motion.div>
         </div>
 
-{/* Right Side: High-End Logo Containment */}
-<div className="hidden md:flex w-1/2 h-screen bg-[#f8f8f8] relative items-center justify-center overflow-hidden">
-  <motion.img 
-    initial={{ opacity: 0, scale: 1.1 }} // Start slightly larger for a "settling" effect
-    animate={{ opacity: 1, scale: 1 }}
-    transition={{ duration: 1.5, ease: "easeOut" }}
-    src="https://res.cloudinary.com/dwlgcj8ht/image/upload/c_pad,w_1080,h_1080,b_rgb:f8f8f8/v1773272464/Rock_Dezign_Vertical_Signature_x52q3n.png" 
-    alt="Rock Dezign Signature" 
-    // object-cover makes it fill the space; object-center keeps the focus in the middle
-    className="w-full h-full object-cover object-center"
-  />
-  
-  {/* Subtle Brand Tint Overlay - darkened slightly to 10% for better contrast */}
-  <div className="absolute inset-0 bg-[#003152]/10 pointer-events-none" />
-</div>
+        {/* Right Side: High-End Logo Containment */}
+        <div className="hidden md:flex w-1/2 h-screen bg-[#f8f8f8] relative items-center justify-center overflow-hidden pt-24 px-12 pb-12">
+          <motion.img 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            src="https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773272464/Rock_Dezign_Vertical_Signature_x52q3n.png" 
+            alt="Rock Dezign Signature" 
+            // Change to object-contain to prevent elongation/cropping
+            // Scale and white space (padding) used to center the brand mark perfectly
+            className="w-full h-full object-contain"
+          />
+          
+          <div className="absolute inset-0 bg-[#003152]/[0.03] pointer-events-none" />
+        </div>
       </section>
 
       {/* 2. SERVICES LIST */}

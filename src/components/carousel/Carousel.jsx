@@ -7,16 +7,13 @@ import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/pagination';
 
+// ─── SLIDE DATA ──────────────────────────────────────────────────────────────
 const slides = [
-    {
-        type: 'video',
-        // Optimised with Cloudinary auto-format and auto-quality
-        src: "https://res.cloudinary.com/dwlgcj8ht/video/upload/q_auto,f_auto/v1771216116/Montessori_K_4_hnomlm.mp4",
-        // Poster image is vital for fixing CLS (layout shift)
-        poster: "https://res.cloudinary.com/dwlgcj8ht/video/upload/so_0/v1771216116/Montessori_K_4_hnomlm.jpg",
-        title: 'Leadership. Innovation.',
-        subtitle: 'Designing for a sustainable future.',
-    },
+    { src: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773352054/3b_1_ypxchm.png" }, // Add Cloudinary Link 1
+    { src: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773352004/3_3_cyliyk.png" }, // Add Cloudinary Link 2
+    { src: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773352005/3_5_kvrc8x.png" }, // Add Cloudinary Link 3
+    { src: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773352006/3_4_w2xron.png" }, // Add Cloudinary Link 4
+    { src: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773352054/3_6_r8toxc.png" }, // Add Cloudinary Link 5
 ];
 
 const Hero = () => {
@@ -37,33 +34,20 @@ const Hero = () => {
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index} className="relative overflow-hidden">
 
-                        {/* Media Layer */}
+                        {/* Image Layer */}
                         <div className="absolute inset-0 z-0 bg-black">
-                            {slide.type === 'video' ? (
-                                <video
-                                    src={slide.src}
-                                    poster={slide.poster}
-                                    autoPlay
-                                    muted
-                                    loop
-                                    playsInline
-                                    preload="metadata"
-                                    className="w-full h-full object-cover scale-105"
-                                />
-                            ) : (
-                                <motion.div
-                                    initial={{ scale: 1.2 }}
-                                    animate={{ scale: 1 }}
-                                    transition={{ duration: 10, ease: "linear" }}
-                                    className="w-full h-full bg-cover bg-center"
-                                    style={{ backgroundImage: `url(${slide.src})` }}
-                                />
-                            )}
+                            <motion.div
+                                initial={{ scale: 1.15 }}
+                                animate={{ scale: 1 }}
+                                transition={{ duration: 10, ease: "easeOut" }}
+                                className="w-full h-full bg-cover bg-center"
+                                style={{ backgroundImage: `url(${slide.src})` }}
+                            />
                             {/* Gradient overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                         </div>
 
-                        {/* Text Layer - Font Styles Preserved */}
+                        {/* Text Layer - Original Branding Restored */}
                         <div className="relative z-20 h-full w-full flex items-end pb-24 px-6 md:px-16">
                             <div className="max-w-4xl">
                                 <motion.div
@@ -84,8 +68,6 @@ const Hero = () => {
                                 </motion.div>
                             </div>
                         </div>
-
-                       
 
                     </SwiperSlide>
                 ))}

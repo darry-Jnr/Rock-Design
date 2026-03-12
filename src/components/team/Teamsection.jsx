@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 const team = [
     {
         name: 'Peter Adeniran',
-        role: 'Founder & Lead Architect',
+        role: 'Founder',
         specialty: 'Residential & Commercial Design',
         image: 'https://res.cloudinary.com/dwlgcj8ht/image/upload/v1772841533/PETER_ADENIRAN_-_FOUNDER_rlihga.jpg'
     },
