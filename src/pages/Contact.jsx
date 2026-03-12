@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import { FiArrowRight, FiCheckCircle, FiX } from 'react-icons/fi';
-import { FaInstagram, FaBehance } from 'react-icons/fa';
+import { FaInstagram, FaBehance, FaWhatsapp } from 'react-icons/fa';
 import { CiLinkedin } from 'react-icons/ci';
 import { SiFiverr } from 'react-icons/si';
 
@@ -34,7 +34,7 @@ const Contact = () => {
         <title>Inquiry & Consultation | Rock Dezign</title>
       </Helmet>
 
-      {/* --- REFINED WIDE TOAST NOTIFICATION --- */}
+      {/* --- TOAST NOTIFICATION --- */}
       <AnimatePresence>
         {showToast && (
           <motion.div
@@ -44,7 +44,7 @@ const Contact = () => {
             className="fixed top-10 right-5 md:right-10 z-[100] w-[90vw] md:w-[450px] bg-white shadow-[0_20px_50px_rgba(0,0,0,0.1)] rounded-lg border border-gray-100 overflow-hidden"
           >
             <div className="p-6 flex items-center gap-5">
-              <div className="bg-green-50 p-2 rounded-full text-green-600">
+              <div className="bg-gray-50 p-2 rounded-full text-[#003152]">
                 <FiCheckCircle size={28} />
               </div>
               <div className="flex-1">
@@ -59,7 +59,6 @@ const Contact = () => {
               </button>
             </div>
             
-            {/* Elegant Depleting Progress Bar */}
             <motion.div 
               initial={{ width: "100%" }}
               animate={{ width: "0%" }}
@@ -127,7 +126,7 @@ const Contact = () => {
               
               <button 
                 disabled={loading}
-                className="group flex items-center gap-4 bg-[#003152] text-white px-10 py-5 text-xs font-bold tracking-[0.3em] uppercase hover:bg-[#00243d] active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed"
+                className="group flex items-center justify-center gap-4 bg-[#003152] text-white px-10 py-5 text-xs font-bold tracking-[0.3em] uppercase hover:bg-[#00243d] active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed w-fit"
               >
                 {loading ? (
                   <span className="flex items-center gap-2">
@@ -155,8 +154,12 @@ const Contact = () => {
 
           <div>
             <h4 className="text-[10px] font-bold tracking-[0.4em] uppercase text-gray-400 mb-6 border-b pb-4">Direct Lines</h4>
-            <p className="text-xl font-light text-[#003152] mb-2 tracking-tight">(+234) 814 269 9879</p>
-            <p className="text-xl font-light text-[#003152] tracking-tight">info@rockdezign.com</p>
+            <a href="tel:+2348142699879" className="block text-xl font-light text-[#003152] mb-2 tracking-tight hover:opacity-60 transition">
+              (+234) 814 269 9879
+            </a>
+            <a href="mailto:info@rockdezign.com" className="block text-xl font-light text-[#003152] tracking-tight hover:opacity-60 transition">
+              info@rockdezign.com
+            </a>
           </div>
 
           <div>
@@ -164,16 +167,19 @@ const Contact = () => {
                 Connect
             </h4>
             <div className="grid grid-cols-2 gap-x-4 gap-y-6">
-                <a href="https://www.instagram.com/rockdezign" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-60 transition">
+                <a href="https://wa.me/qr/K3JEXJR4W4UXK1" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-40 transition">
+                    <FaWhatsapp size={18} /> WhatsApp
+                </a>
+                <a href="https://www.instagram.com/rockdezign" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-40 transition">
                     <FaInstagram size={18} /> Instagram
                 </a>
-                <a href="https://www.linkedin.com/company/rock-dezign" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-60 transition">
+                <a href="https://www.linkedin.com/company/rock-dezign" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-40 transition">
                     <CiLinkedin size={20} /> LinkedIn
                 </a>
-                <a href="https://www.behance.net/RockDezign" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-60 transition">
+                <a href="https://www.behance.net/RockDezign" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-40 transition">
                     <FaBehance size={18} /> Behance
                 </a>
-                <a href="https://www.fiverr.com/rock_dezign" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-60 transition">
+                <a href="https://www.fiverr.com/rock_dezign" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-base font-medium text-[#003152] hover:opacity-40 transition">
                     <SiFiverr size={18} /> Fiverr
                 </a>
             </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
@@ -119,12 +119,12 @@ const Navbar = () => {
                 info@rockdezign.com
               </a>
               <a 
-                href="tel:+2348123456789" 
+                href="tel:+2348142699879" 
                 className={`text-[9px] font-bold tracking-[0.3em] uppercase transition-all duration-300 hover:opacity-50 font-barlow ${
                   isDarkNav ? 'text-[#003152]' : 'text-white'
                 }`}
               >
-                +234 812 345 6789
+                (+234) 814 269 9879
               </a>
             </div>
 
@@ -167,7 +167,6 @@ const Navbar = () => {
             transition={{ type: 'spring', damping: 30, stiffness: 200 }}
             className="fixed right-0 top-0 h-screen w-full md:w-[60%] lg:w-[50%] z-[200] bg-white text-[#003152] shadow-2xl flex flex-col p-8 md:p-12 overflow-y-auto"
           >
-            {/* Header */}
             <div className="flex justify-between items-center mb-6">
               <span className="text-[9px] font-bold tracking-[0.5em] uppercase text-gray-300 font-barlow">Navigation</span>
               <button onClick={() => setMenuOpen(false)} className="group flex items-center gap-3">
@@ -176,7 +175,6 @@ const Navbar = () => {
               </button>
             </div>
 
-            {/* Links Section - Adjusted sizing for laptop screens */}
             <div className="flex-grow flex flex-col justify-center py-4">
               <div className="flex flex-col">
                 {navLinks.map((link, i) => (
@@ -198,7 +196,6 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Footer Section - Grid Columns Optimized */}
             <div className="mt-auto pt-6 border-t border-gray-100">
               <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                 <div>
@@ -219,7 +216,7 @@ const Navbar = () => {
                 <div className="col-span-2 md:col-span-1">
                   <p className="text-[8px] font-bold tracking-widest text-gray-300 uppercase mb-3 font-barlow">Inquiries</p>
                   <div className="flex flex-col gap-1 text-xs font-light font-barlow">
-                    <a href="tel:+2348123456789" className="text-[#003152] hover:opacity-60 transition-colors">+234 812 345 6789</a>
+                    <a href="tel:+2348142699879" className="text-[#003152] hover:opacity-60 transition-colors">+234 814 269 9879</a>
                     <a href="mailto:info@rockdezign.com" className="text-[#003152] hover:opacity-60 transition-colors">info@rockdezign.com</a>
                   </div>
                 </div>
@@ -229,7 +226,7 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-      {/* Search Panel - Same height optimizations applied */}
+      {/* Search Panel remains unchanged but accessible */}
       <AnimatePresence>
         {searchOpen && (
           <motion.div

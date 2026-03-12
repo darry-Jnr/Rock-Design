@@ -1,4 +1,5 @@
-import { FaArrowUp, FaInstagram, FaBehance } from "react-icons/fa";
+import React from 'react';
+import { FaArrowUp, FaInstagram, FaBehance, FaWhatsapp } from "react-icons/fa";
 import { CiLinkedin } from "react-icons/ci";
 import { SiFiverr } from "react-icons/si";
 import logo from '../../assets/images/faviconn.png';
@@ -32,10 +33,15 @@ const Footer = () => {
                             <p className="text-gray-500 uppercase tracking-widest text-[10px] mb-4">
                                 General Inquiries
                             </p>
-                            <p className="text-xl font-light italic mb-1">info@rockdezign.com</p>
-                            <p className="text-xl font-light tracking-tighter text-gray-400">
-                                (+234) 814 269 9879
+                            <p className="text-xl font-light italic mb-1 hover:text-white transition-colors cursor-pointer">
+                                info@rockdezign.com
                             </p>
+                            <a 
+                                href="tel:+2348142699879" 
+                                className="text-xl font-light tracking-tighter text-gray-400 hover:text-white transition-colors"
+                            >
+                                (+234) 814 269 9879
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -84,12 +90,22 @@ const Footer = () => {
                         </ul>
                     </div>
 
-                    {/* Connect — only links that exist */}
+                    {/* Connect — Updated with WhatsApp */}
                     <div>
                         <h4 className="text-[10px] font-bold tracking-[0.3em] uppercase mb-6 text-white/40">
                             Connect
                         </h4>
                         <ul className="space-y-4 text-sm font-light">
+                            <li>
+                                <a
+                                    href="https://wa.me/qr/K3JEXJR4W4UXK1"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="flex items-center gap-3 hover:text-[#25D366] transition-colors"
+                                >
+                                    <FaWhatsapp size={14} /> WhatsApp
+                                </a>
+                            </li>
                             <li>
                                 <a
                                     href="https://www.instagram.com/rockdezign"
@@ -153,7 +169,6 @@ const Footer = () => {
                     </div>
 
                 </div>
-                {/* END MAIN GRID */}
 
                 {/* 3. BOTTOM BAR */}
                 <div className="mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
@@ -165,11 +180,8 @@ const Footer = () => {
                         <a href="#" className="hover:text-white transition">Terms</a>
                     </div>
                 </div>
-                {/* END BOTTOM BAR */}
 
             </div>
-            {/* END max-w-7xl */}
-
         </footer>
     );
 };
