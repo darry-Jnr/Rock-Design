@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, useInView, useSpring, useMotionValue } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import DesignFlow from '../components/designflow/Designflow';
@@ -146,23 +146,6 @@ const ServiceRow = ({ service, index }) => {
 // ─── MAIN PAGE ────────────────────────────────────────────────────────────────
 
 const Services = () => {
-  // Parallax Motion Values
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 150 };
-  const dx = useSpring(mouseX, springConfig);
-  const dy = useSpring(mouseY, springConfig);
-
-  const handleMouseMove = (e) => {
-    const { clientX, clientY, currentTarget } = e;
-    const { width, height, left, top } = currentTarget.getBoundingClientRect();
-    const x = (clientX - left) / width - 0.5;
-    const y = (clientY - top) / height - 0.5;
-    mouseX.set(x * 50); // Intensity of movement
-    mouseY.set(y * 50);
-  };
-
   return (
     <div className="bg-white text-[#003152]">
       <Helmet>
@@ -173,7 +156,7 @@ const Services = () => {
       <section className="relative h-screen flex flex-col md:flex-row overflow-hidden border-b border-gray-100">
         
         {/* Left Side */}
-        <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-6 md:px-20 bg-white">
+        <div className="w-full md:w-1/2 h-full flex flex-col justify-center px-6 md:px-20 bg-white z-10">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -193,70 +176,21 @@ const Services = () => {
           </motion.div>
         </div>
 
-        {/* Right Side: Interactive Geometric Block */}
-        <div 
-            onMouseMove={handleMouseMove}
-            className="hidden md:flex w-1/2 h-full bg-[#003152] relative overflow-hidden items-center justify-center cursor-crosshair"
-        >
-          {/* Subtle Dot Grid */}
-          <svg className="absolute inset-0 w-full h-full opacity-10">
-            <defs>
-              <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
-                <circle cx="30" cy="30" r="1" fill="white" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#dots)" />
-          </svg>
-
-          {/* Parallax Moving Axis Lines */}
-          <motion.div style={{ x: dx }} className="absolute left-1/4 h-full w-[1px] bg-white/10" />
-          <motion.div style={{ y: dy }} className="absolute top-1/3 w-full h-[1px] bg-white/10" />
-
-          {/* Main Rotating Geometrics */}
-          <motion.div
-            style={{ x: dx, y: dy }}
-            className="absolute w-64 h-64 border border-white/10"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          />
-          <motion.div
-            style={{ x: useSpring(mouseX, { stiffness: 50 }), y: useSpring(mouseY, { stiffness: 50 }) }}
-            className="absolute w-[420px] h-[420px] border border-white/5 border-dashed rounded-full"
-            animate={{ rotate: -360 }}
-            transition={{ duration: 70, repeat: Infinity, ease: 'linear' }}
-          />
-
-          {/* Center Branding & Data */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.6, duration: 1.2 }}
-            className="relative z-10 text-center"
-          >
-            <span className="text-white/[0.07] text-[200px] font-light font-barlow leading-none block select-none tracking-tighter">
-              RD
-            </span>
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-4 whitespace-nowrap">
-                <div className="w-8 h-[1px] bg-white/20" />
-                <span className="text-[8px] text-white/30 font-bold tracking-[0.5em] uppercase font-barlow animate-pulse">
-                    LGS // 6.5244° N
-                </span>
-                <div className="w-8 h-[1px] bg-white/20" />
-            </div>
-          </motion.div>
-
-          {/* Drafting Markers */}
-          <div className="absolute top-8 left-8 flex flex-col gap-2">
-            <div className="w-8 h-8 border-t border-l border-white/20" />
-            <span className="text-[7px] text-white/20 font-bold tracking-widest font-barlow">COORD: XYZ_88</span>
-          </div>
-          <div className="absolute top-8 right-8 w-8 h-8 border-t border-r border-white/20" />
-          <div className="absolute bottom-8 left-8 w-8 h-8 border-b border-l border-white/20" />
-          <div className="absolute bottom-8 right-8 flex flex-col items-end gap-2">
-            <span className="text-[7px] text-white/20 font-bold tracking-widest font-barlow">SCALE: 1:100</span>
-            <div className="w-8 h-8 border-b border-r border-white/20" />
-          </div>
-        </div>
+{/* Right Side: High-End Logo Containment */}
+<div className="hidden md:flex w-1/2 h-screen bg-[#f8f8f8] relative items-center justify-center overflow-hidden">
+  <motion.img 
+    initial={{ opacity: 0, scale: 1.1 }} // Start slightly larger for a "settling" effect
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 1.5, ease: "easeOut" }}
+    src="https://res.cloudinary.com/dwlgcj8ht/image/upload/c_pad,w_1080,h_1080,b_rgb:f8f8f8/v1773272464/Rock_Dezign_Vertical_Signature_x52q3n.png" 
+    alt="Rock Dezign Signature" 
+    // object-cover makes it fill the space; object-center keeps the focus in the middle
+    className="w-full h-full object-cover object-center"
+  />
+  
+  {/* Subtle Brand Tint Overlay - darkened slightly to 10% for better contrast */}
+  <div className="absolute inset-0 bg-[#003152]/10 pointer-events-none" />
+</div>
       </section>
 
       {/* 2. SERVICES LIST */}
@@ -282,7 +216,6 @@ const Services = () => {
         </div>
       </section>
 
-      {/* 3. DESIGN FLOW Component */}
       <DesignFlow />
 
       {/* 4. CTA SECTION */}
