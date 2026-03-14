@@ -2,6 +2,7 @@ import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade, Pagination } from 'swiper/modules';
 import { motion } from 'framer-motion';
+import interiorImg from '../../assets/images/interior-img.webp';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
@@ -14,6 +15,7 @@ const slides = [
     { src: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773352005/3_5_kvrc8x.png" }, // Add Cloudinary Link 3
     { src: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773352006/3_4_w2xron.png" }, // Add Cloudinary Link 4
     { src: "https://res.cloudinary.com/dwlgcj8ht/image/upload/v1773352054/3_6_r8toxc.png" }, // Add Cloudinary Link 5
+    { src: interiorImg }
 ];
 
 const Hero = () => {
@@ -56,7 +58,7 @@ const Hero = () => {
                                     transition={{ duration: 1, delay: 0.5 }}
                                 >
                                     <span className="text-white/40 text-[10px] font-bold tracking-[0.6em] uppercase mb-6 block font-barlow">
-                                        Rock Dezign Studio
+                                        Rock Dezign Limited
                                     </span>
                                     <h1 className="text-5xl md:text-6xl font-light text-white tracking-tighter leading-none mb-6 font-barlow">
                                         Leadership<span className="italic font-serif text-white/50">.</span>{' '}

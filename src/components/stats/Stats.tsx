@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const stats = [
-  { label: 'Projects Delievered', value: '50', suffix: '+' },
+  { label: 'Projects Delievered', value: '150', suffix: '+' },
   { label: 'Square Footage', value: '300', suffix: 'k' },
   { label: 'Satisfied Clients', value: '80', suffix: '+' },
   { label: 'Countries Served', value: '07', suffix: '+' },
